@@ -16,7 +16,7 @@
 # Version 1.0 2022-12-01
 # 在菜单版本的基础上，初步整合成模块并改版了一下，修复了部分BUG 比如adb连接BUG等
 # Version Description End 
-# Function:Menu...Path_fix...Env_fix...AutoMap...wecarflow...sidemenu...
+# Function:Menu...
 #***************************************************************#
 #begin
 function Path_fix()
