@@ -618,7 +618,7 @@ function engineer()
 			echo "你选择了回退"
 			filename="enger.apk"
 			echo "安装至普通应用"
-			adb install -r $filename
+			adb install -r --user all $filename
 			echo "释放原进程"
 			#adb shell "killall com.tencent.sotainstaller 2>/dev/null"
 			#adb uninstall
