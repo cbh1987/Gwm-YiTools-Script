@@ -88,13 +88,13 @@ function Adb_Init()
 	echo "尝试连接该IP"
 	while true
 	do
-		#str_refused=$(adb connect $carip | grep refused)
-		#if [[ $str_refused == "" ]]; then
-		#	echo "adb设备连接测试01"
-		#else
-		#	echo "adb设备连接异常，连接$carip被拒绝，请确认车机ip正确并车机工程模式其他菜单中已开启TCP/IP"
-		#	read -p "请手动输入车机的IP地址确认无误后回车:" carip
-		#fi
+		str_refused=$(adb connect $carip | grep refused)
+		if [[ $str_refused == "" ]]; then
+			echo "adb设备连接测试01"
+		else
+			echo "adb设备连接异常，连接$carip被拒绝，请确认车机ip正确并车机工程模式其他菜单中已开启TCP/IP"
+			read -p "请手动输入车机的IP地址确认无误后回车:" carip
+		fi
 		str_faied=$(adb connect $carip | grep failed)
 		if [[ $str_faied == "" ]]; then
 			echo "adb设备连接测试02"
