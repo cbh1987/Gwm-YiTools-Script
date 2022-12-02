@@ -673,7 +673,7 @@ function wecarflow()
 		 du -sh $bakfile_check
 		 check=0
 		 suma=`du -sh $bakfile_check |awk '{print $1}'`
-		 [ "$suma" == $bak_tar_size ]&&echo "本地备份校验成功"||check=1
+		 [ "$suma" == "67M" ]&&echo "本地备份校验成功"||check=1
 		 [ "$check" == "1" ]&&echo "本地备份校验失败将执行清理操作并拉取网络备份!!!"||echo "ok"
 		 [ "$check" == "1" ]&&rm -rf $bakfile_check ||echo "ok"
 		 [ "$check" == "1" ]&&rm -rf $bakfile_check.md5 ||echo "ok"
