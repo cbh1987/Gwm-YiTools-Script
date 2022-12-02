@@ -693,7 +693,7 @@ function wecarflow()
 			wget -O wecarflow.tar  "http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E7%88%B1%E8%B6%A3%E5%90%AC%E5%A4%87%E4%BB%BD/%E7%88%B1%E8%B6%A3%E5%90%AC2.6.tar"
 			filename="wecarflow.tar"
 			echo "5830d10b16622ce21a6c4cf7ade23225"
-			md5a=`md5sum enger.apk |awk '{print $1}'`
+			md5a=`md5sum $filename |awk '{print $1}'`
 			echo "$md5a"
 			du -sh wecarflow.tar
 			;;
