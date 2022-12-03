@@ -151,10 +151,10 @@ function AutoMap()
 	md51="8b42504707d33e0104e16d1a0f1a2149"
     AutoMap_Not_Full_Screen_Apk_Url="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/6.5.0.601571/%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE_6.5.0.601571_%E5%B8%A6%E5%BF%AB%E6%8D%B7%E5%AF%BC%E8%88%AA%E6%A0%8F.apk"
 	md52="a4993e1ce81c2e7f96c79749248b52a9"
+	
 	AutoMap_Full_Screen_Apk_Url_Beta="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/6.5.0.601571.beta/6.5.0.601571-9011.apk"
-	md51="c295e6b6f7c6a2963f34dd7f950f9cb8"
-    AutoMap_Not_Full_Screen_Apk_Url_Beta="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/6.5.0.601571.beta/6.5.0.601571-9011%E5%B8%A6%E5%BF%AB%E6%8D%B7%E9%94%AE.apk"
-	md52="d712b52f7fcdf88f33a2f7ef0085069a"
+	AutoMap_Not_Full_Screen_Apk_Url_Beta="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/6.5.0.601571.beta/6.5.0.601571-9011%E5%B8%A6%E5%BF%AB%E6%8D%B7%E9%94%AE.apk"
+	
     AutoMap_Backup_Zip_Url="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/%E5%8E%9F%E8%BD%A6%E5%A4%87%E4%BB%BD/automap.zip"
 	md53="6b77b446d5ce82edfe0b7813b721047d"
 	AutoMap_Check_Script_Url="https://magisk.proyy.com/tmp/check.sh"
@@ -167,12 +167,14 @@ function AutoMap()
     	4)
 			echo "您选择的是三指仪表适配内测全屏版本"
 			AutoMap_Url=$AutoMap_Full_Screen_Apk_Url_Beta
+			md51="c295e6b6f7c6a2963f34dd7f950f9cb8"
 			Flag=0
             
             ;;
         3)
 			echo "您选择的是三指仪表适配内测快捷键版本"
 			AutoMap_Url=$AutoMap_Not_Full_Screen_Apk_Url_Beta
+			md52="d712b52f7fcdf88f33a2f7ef0085069a"
 			Flag=0
             ;;
         2)
