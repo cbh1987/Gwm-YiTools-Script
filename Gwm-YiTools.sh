@@ -11,6 +11,8 @@
 #
 #
 #
+# Version 1.2.1 2022-12-04
+# 高德beta仪表测试版状态栏透明沉浸
 # Version 1.2 2022-12-03
 # 爱趣听2.1fix.高德beta仪表测试版
 # Version 1.1 2022-12-02
@@ -167,14 +169,15 @@ function AutoMap()
     	4)
 			echo "您选择的是三指仪表适配内测全屏版本"
 			AutoMap_Url=$AutoMap_Full_Screen_Apk_Url_Beta
-			md51="c295e6b6f7c6a2963f34dd7f950f9cb8"
+			md51="dffd338795f1351902b36a04499d66d2"
 			Flag=1
 			bak=0
             ;;
         3)
-			echo "您选择的是三指仪表适配内测快捷栏版本"
-			AutoMap_Url=$AutoMap_Not_Full_Screen_Apk_Url_Beta
-			md52="d712b52f7fcdf88f33a2f7ef0085069a"
+			#echo "您选择的是三指仪表适配内测快捷栏版本"
+			echo "暂时先用着全屏版本，等下"
+			AutoMap_Url=$AutoMap_Full_Screen_Apk_Url_Beta
+			md52="dffd338795f1351902b36a04499d66d2"
 			Flag=1
 			bak=0
             ;;
