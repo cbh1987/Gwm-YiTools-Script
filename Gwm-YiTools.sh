@@ -163,7 +163,7 @@ function AutoMap()
 	AutoMap_Tar="AutoMap.tar"
 	Flag=0
     #read -p "请输入数字选择升级全屏版|快捷键|回退|Beta全屏/Beta快捷(2/1/0/4/3):" select_num
-    read -p "请输入数字选择升级Beta全屏版|Beta快捷键|回退|(4/3/0):" select_num
+    read -p "请输入数字选择升级Beta全屏版|Beta快捷栏|回退|(4/3/0):" select_num
     case $select_num in
     	4)
 			echo "您选择的是三指仪表适配内测全屏版本"
@@ -173,7 +173,7 @@ function AutoMap()
             
             ;;
         3)
-			echo "您选择的是三指仪表适配内测快捷键版本"
+			echo "您选择的是三指仪表适配内测快捷栏版本"
 			AutoMap_Url=$AutoMap_Not_Full_Screen_Apk_Url_Beta
 			md52="d712b52f7fcdf88f33a2f7ef0085069a"
 			Flag=1
@@ -185,7 +185,7 @@ function AutoMap()
             
             ;;
         1)
-            echo "您选择的是快捷键版本"
+            echo "您选择的是快捷栏版本"
 			AutoMap_Url=$AutoMap_Not_Full_Screen_Apk_Url
 			Flag=0
             ;;
