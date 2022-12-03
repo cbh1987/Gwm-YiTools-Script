@@ -274,7 +274,15 @@ function AutoMap()
 		adb shell "chmod -R 644 /system/app/AutoMap/lib/arm/*"
 		echo "开始检测当前车机的全屏配置规则"
 		adb shell "settings get global policy_control"
-		if [[ "$select_num" == "2" ]];then
+		if [[ "$select_num" == "4" ]];then
+			echo "如使用第三方app全屏或者自定义全屏请在脚本菜单使用全屏选项!!!"
+			adb shell "settings put global policy_control null"
+		elif [[ "$select_num" == "3" ]];then
+			echo "快捷键版本将恢复配置为默认设置、会覆盖之前的设置!!!"
+			echo "全屏版本将只设置高德为全屏、会覆盖之前的设置!!!"
+			echo "如使用第三方app全屏或者自定义全屏请在脚本菜单使用全屏选项!!!"
+			adb shell "settings put global policy_control null"
+		elif [[ "$select_num" == "2" ]];then
 			echo "全屏版本将只设置高德为全屏、会覆盖之前的设置!!!"
 			echo "如使用第三方app全屏或者自定义全屏请在脚本菜单使用全屏选项!!!"
 			adb shell "settings put global policy_control immersive.full=com.autonavi.amapauto"
