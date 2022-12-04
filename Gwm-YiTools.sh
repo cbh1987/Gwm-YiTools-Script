@@ -166,7 +166,7 @@ function AutoMap()
 	Flag=0
 	bak=0
     #read -p "请输入数字选择升级全屏版|快捷键|回退|Beta全屏/Beta快捷(2/1/0/4/3):" select_num
-    read -p "请输入数字选择升级Beta全屏版|Beta快捷栏|回退|(4/3/0):" select_num
+    read -p "请输入数字选择升级Beta全屏版|回退|(4/0):" select_num
     case $select_num in
     	4)
 			echo "您选择的是三指仪表适配内测全屏版本"
@@ -177,7 +177,8 @@ function AutoMap()
             ;;
         3)
 			#echo "您选择的是三指仪表适配内测快捷栏版本"
-			echo "暂时先用着全屏版本，等下"
+			echo "暂时先用着全屏版本，等后面更新"
+			sleep 5
 			AutoMap_Url=$AutoMap_Full_Screen_Apk_Url_Beta
 			md52="dffd338795f1351902b36a04499d66d2"
 			Flag=1
