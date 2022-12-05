@@ -308,6 +308,8 @@ function AutoMap()
 		echo "查看Packages list信息"
 		adb shell "pm list packages amap"
 		adb shell "pm list packages -u amap"
+		echo "清理数据"
+		adb shell "pm clear com.autonavi.amapauto"
 		echo "开始检测当前车机的全屏配置规则"
 		adb shell "settings get global policy_control"
 		if [[ "$select_num" == "4" ]];then
@@ -509,6 +511,8 @@ function AutoMapBeta()
 		echo "查看Packages list信息"
 		adb shell "pm list packages amap"
 		adb shell "pm list packages -u amap"
+		echo "清理数据"
+		adb shell "pm clear com.autonavi.amapauto"
 		echo "开始检测当前车机的全屏配置规则"
 		adb shell "settings get global policy_control"
 		if [[ "$select_num" == "1" ]];then
