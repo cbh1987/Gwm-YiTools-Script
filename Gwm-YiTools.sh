@@ -154,7 +154,7 @@ function AutoMap()
     AutoMap_Not_Full_Screen_Apk_Url="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/6.5.0.601571/%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE_6.5.0.601571_%E5%B8%A6%E5%BF%AB%E6%8D%B7%E5%AF%BC%E8%88%AA%E6%A0%8F.apk"
 	md52="a4993e1ce81c2e7f96c79749248b52a9"
 	
-	AutoMap_Full_Screen_Apk_Url_Beta="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/6.5.0.601571.beta/6.5.0.601571-9011.apk"
+	AutoMap_Full_Screen_Apk_Url_Beta="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/6.5.0.601571.beta/9011-dock.apk"
 	AutoMap_Not_Full_Screen_Apk_Url_Beta="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/6.5.0.601571.beta/6.5.0.601571-9011%E5%B8%A6%E5%BF%AB%E6%8D%B7%E9%94%AE.apk"
 	
     AutoMap_Backup_Zip_Url="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/%E5%8E%9F%E8%BD%A6%E5%A4%87%E4%BB%BD/automap.zip"
@@ -166,12 +166,12 @@ function AutoMap()
 	Flag=0
 	bak=0
     #read -p "请输入数字选择升级全屏版|快捷键|回退|Beta全屏/Beta快捷(2/1/0/4/3):" select_num
-    read -p "请输入数字选择升级Beta全屏版|回退|(4/0):" select_num
+    read -p "请输入数字选择升级Beta全屏版|回退(4/0):" select_num
     case $select_num in
     	4)
 			echo "您选择的是三指仪表适配内测全屏版本"
 			AutoMap_Url=$AutoMap_Full_Screen_Apk_Url_Beta
-			md51="dffd338795f1351902b36a04499d66d2"
+			md51="2b693bce73d940fc6272b705b16fc5b2"
 			Flag=1
 			bak=0
             ;;
@@ -180,7 +180,7 @@ function AutoMap()
 			echo "暂时先用着全屏版本，等后面更新"
 			sleep 5
 			AutoMap_Url=$AutoMap_Full_Screen_Apk_Url_Beta
-			md52="dffd338795f1351902b36a04499d66d2"
+			md52="2b693bce73d940fc6272b705b16fc5b2"
 			Flag=1
 			bak=0
             ;;
@@ -258,12 +258,18 @@ function AutoMap()
 	fi
 	Adb_Init
 	if [[ "$filename" != "" ]];then
-		echo "删除原车高德地图"
-		adb shell "rm -rf /system/app/AutoMap/*"
-		echo "释放system分区空间"
+		echo "释放进程...."
 		adb shell "killall com.autonavi.amapauto 2>/dev/null"
 		adb shell "killall com.autonavi.amapauto:push 2>/dev/null"
 		adb shell "killall com.autonavi.amapauto:locationservice 2>/dev/null"
+		echo "卸载升级或者清理手动升级残留"
+		adb shell "pm uninstall com.autonavi.amapauto >/dev/null"
+		adb shell "pm uninstall --user 0 com.autonavi.amapauto >/dev/null"
+		echo "查看Packages list信息"
+		adb shell "pm list packages amap"
+		adb shell "pm list packages -u amap"
+		echo "删除原车高德地图系统文件"
+		adb shell "rm -rf /system/app/AutoMap/*"
 		echo "上传替换高德包"
 		adb push $filename /data/local/tmp/
 		adb push $filename.md5 /data/local/tmp/
@@ -278,10 +284,36 @@ function AutoMap()
 		adb shell "chmod -R 755 /system/app/AutoMap/"
 		adb shell "chmod -R 644 /system/app/AutoMap/AutoMap.apk"
 		adb shell "chmod -R 644 /system/app/AutoMap/lib/arm/*"
+		if [[ "$bak" == "0" ]]; then
+			echo "dex2oat优化处理"
+			adb shell "mkdir -p /system/app/AutoMap/oat/arm"
+			adb shell "/system/bin/dex2oat --dex-file=/system/app/AutoMap/AutoMap.apk  --oat-file=/system/app/AutoMap/oat/arm/AutoMap.odex"
+			adb shell "chmod -R 755 /system/app/AutoMap/oat"
+			adb shell "chmod -R 644 /system/app/AutoMap/oat/arm/*"
+			adb shell "ls -la /system/app/AutoMap/lib/arm/*"
+			echo "dex2oat优化处理end"
+		else
+			echo "pass"
+		fi
+		echo "恢复APP状态及还原安装"
+		adb shell "pm enable com.autonavi.amapauto"
+		adb shell "pm unhide com.autonavi.amapauto"
+		adb shell "pm default-state --user 0 com.autonavi.amapauto"
+		echo "测试清理步骤"
+		adb shell "rm -rf /data/system/package_cache/1/AutoMap*"
+		echo "等待10秒后开始还原"
+		sleep 10
+		echo "尝试还原"
+		adb shell "cmd package install-existing com.autonavi.amapauto"
+		echo "查看Packages list信息"
+		adb shell "pm list packages amap"
+		adb shell "pm list packages -u amap"
 		echo "开始检测当前车机的全屏配置规则"
 		adb shell "settings get global policy_control"
 		if [[ "$select_num" == "4" ]];then
 			echo "如使用第三方app全屏或者自定义全屏请在脚本菜单使用全屏选项!!!"
+			echo "Beta版本自带左侧手势侧滑回桌面!!!"
+			sleep 3
 			adb shell "settings put global policy_control null"
 		elif [[ "$select_num" == "3" ]];then
 			echo "快捷键版本将恢复配置为默认设置、会覆盖之前的设置!!!"
