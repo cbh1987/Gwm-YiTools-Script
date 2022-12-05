@@ -165,8 +165,8 @@ function AutoMap()
 	AutoMap_Tar="AutoMap.tar"
 	Flag=0
 	bak=0
-    #read -p "请输入数字选择升级全屏版|快捷键|回退|Beta全屏/Beta快捷(2/1/0/4/3):" select_num
-    read -p "请输入数字选择升级Beta全屏版|回退(4/0):" select_num
+    read -p "请输入数字选择升级全屏版|快捷键|回退(2/1/0):" select_num
+    #read -p "请输入数字选择升级Beta全屏版|回退(4/0):" select_num
     case $select_num in
     	4)
 			echo "您选择的是三指仪表适配内测全屏版本"
@@ -284,7 +284,7 @@ function AutoMap()
 		adb shell "chmod -R 755 /system/app/AutoMap/"
 		adb shell "chmod -R 644 /system/app/AutoMap/AutoMap.apk"
 		adb shell "chmod -R 644 /system/app/AutoMap/lib/arm/*"
-		if [[ "$bak" == "0" ]]; then
+		if [[ "$bak" == "9" ]]; then
 			echo "dex2oat优化处理"
 			adb shell "mkdir -p /system/app/AutoMap/oat/arm"
 			adb shell "/system/bin/dex2oat --dex-file=/system/app/AutoMap/AutoMap.apk  --oat-file=/system/app/AutoMap/oat/arm/AutoMap.odex"
