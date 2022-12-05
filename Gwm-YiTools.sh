@@ -290,7 +290,7 @@ function AutoMap()
 			adb shell "/system/bin/dex2oat --dex-file=/system/app/AutoMap/AutoMap.apk  --oat-file=/system/app/AutoMap/oat/arm/AutoMap.odex"
 			adb shell "chmod -R 755 /system/app/AutoMap/oat"
 			adb shell "chmod -R 644 /system/app/AutoMap/oat/arm/*"
-			adb shell "ls -la /system/app/AutoMap/lib/arm/*"
+			adb shell "ls -la /system/app/AutoMap/oat/arm/*"
 			echo "dex2oat优化处理end"
 		else
 			echo "pass"
