@@ -347,6 +347,207 @@ function AutoMap()
     
 }
 
+function AutoMapBeta()
+{
+	cd $Work_Path
+    AutoMap_Full_Screen_Apk_Url="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/6.5.0.601571/Auto_6.5.0.601571_release_signed.apk"
+	md51="8b42504707d33e0104e16d1a0f1a2149"
+    AutoMap_Not_Full_Screen_Apk_Url="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/6.5.0.601571/%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE_6.5.0.601571_%E5%B8%A6%E5%BF%AB%E6%8D%B7%E5%AF%BC%E8%88%AA%E6%A0%8F.apk"
+	md52="a4993e1ce81c2e7f96c79749248b52a9"
+	
+	AutoMap_Full_Screen_Apk_Url_Beta="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/6.5.0.601571.beta/9011-dock.apk"
+	AutoMap_Not_Full_Screen_Apk_Url_Beta="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/6.5.0.601571.beta/6.5.0.601571-9011%E5%B8%A6%E5%BF%AB%E6%8D%B7%E9%94%AE.apk"
+	
+    AutoMap_Backup_Zip_Url="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/%E5%8E%9F%E8%BD%A6%E5%A4%87%E4%BB%BD/automap.zip"
+	md53="6b77b446d5ce82edfe0b7813b721047d"
+	AutoMap_Check_Script_Url="https://magisk.proyy.com/tmp/check.sh"
+	AutoMap_Apk="AutoMap.apk"
+	AutoMap_Zip="AutoMap.zip"
+	AutoMap_Tar="AutoMap.tar"
+	Flag=0
+	bak=0
+    #read -p "请输入数字选择升级全屏版|快捷键|回退(2/1/0):" select_num
+    read -p "请输入数字选择升级三指Beta全屏带返回主页版|回退(1/0):" select_num
+    case $select_num in
+    	1)
+			echo "您选择的是三指仪表适配内测全屏版本"
+			AutoMap_Url=$AutoMap_Full_Screen_Apk_Url_Beta
+			md51="2b693bce73d940fc6272b705b16fc5b2"
+			Flag=1
+			bak=0
+            ;;
+        33)
+			#echo "您选择的是三指仪表适配内测快捷栏版本"
+			echo "暂时先用着全屏版本，等后面更新"
+			sleep 5
+			AutoMap_Url=$AutoMap_Full_Screen_Apk_Url_Beta
+			md52="2b693bce73d940fc6272b705b16fc5b2"
+			Flag=1
+			bak=0
+            ;;
+        22)
+			echo "您选择的是全屏版本"
+			AutoMap_Url=$AutoMap_Full_Screen_Apk_Url
+			Flag=0
+			bak=0
+            ;;
+        11)
+            echo "您选择的是快捷栏版本"
+			AutoMap_Url=$AutoMap_Not_Full_Screen_Apk_Url
+			Flag=0
+			bak=0
+            ;;
+        0)
+            echo "您选择的是回退至原厂版本"
+			AutoMap_Url=$AutoMap_Backup_Zip_Url
+			Flag=1
+			bak=1
+            ;;
+        *)
+            echo "输入错误"
+            exit 0
+    esac
+	filename=""
+	wget -O check.sh $AutoMap_Check_Script_Url
+	if [[ "$bak" == "0" ]]; then
+		echo "开始升级预处理"
+		cd $Work_Path
+		rm -rf tmp
+		mkdir tmp
+		cd tmp
+		wget -O $AutoMap_Apk $AutoMap_Url
+		md5a=`md5sum $AutoMap_Apk |awk '{print $1}'`
+		echo "$md5a:$md51:$md52"
+		if [ "$md5a" == "$md51" -o "$md5a" == "$md52" ];then
+			echo "开始解包"
+			unzip -o $AutoMap_Apk
+			echo "解包完成..."
+			echo "开始打包必要文件"
+			rm -rf automap
+			mkdir -p automap/lib
+			mv lib/armeabi-v7a automap/lib/arm
+			cp $AutoMap_Apk automap/AutoMap.apk
+			rm -rf $Work_Path/$AutoMap_Tar
+			cd automap/ && tar -cvpf $Work_Path/$AutoMap_Tar *
+			find ./ -type f -print0|xargs -0 md5sum >$Work_Path/$AutoMap_Tar.md5
+			sed -i 's/.\//\/system\/app\/AutoMap\//' $Work_Path/$AutoMap_Tar.md5
+			cd $Work_Path/ && rm -rf $Work_Path/tmp 
+			ls -l $AutoMap_Tar*
+			echo "预处理完成"
+			filename="$AutoMap_Tar"
+		else
+			echo "下载失败、请保持网络稳定重新执行脚本!!!"
+			exit 0
+		fi
+		
+	else
+		echo "开始回退预处理"
+		cd $Work_Path
+		wget -O $AutoMap_Zip $AutoMap_Backup_Zip_Url
+		md5a=`md5sum $AutoMap_Zip |awk '{print $1}'`
+		if [[ "$md5a" == "$md53" ]];then
+			rm -rf amap_backup.*
+			unzip -d $Work_Path $AutoMap_Zip
+			ls -l amap_backup*
+			echo "预处理完成"
+			filename="amap_backup.tar"
+		else
+			echo "下载失败、请保持网络稳定重新执行脚本!!!"
+			exit 0
+		fi
+		
+	fi
+	Adb_Init
+	if [[ "$filename" != "" ]];then
+		echo "释放进程...."
+		adb shell "killall com.autonavi.amapauto 2>/dev/null"
+		adb shell "killall com.autonavi.amapauto:push 2>/dev/null"
+		adb shell "killall com.autonavi.amapauto:locationservice 2>/dev/null"
+		echo "卸载升级或者清理手动升级残留"
+		adb shell "pm uninstall com.autonavi.amapauto >/dev/null"
+		adb shell "pm uninstall --user 0 com.autonavi.amapauto >/dev/null"
+		echo "查看Packages list信息"
+		adb shell "pm list packages amap"
+		adb shell "pm list packages -u amap"
+		echo "删除原车高德地图系统文件"
+		adb shell "rm -rf /system/app/AutoMap/*"
+		echo "上传替换高德包"
+		adb push $filename /data/local/tmp/
+		adb push $filename.md5 /data/local/tmp/
+		adb push check.sh /data/local/tmp/
+		adb shell chmod 777 /data/local/tmp/check.sh
+		echo "执行替换操作"
+		adb shell "tar -xvpf /data/local/tmp/$filename -C /system/app/AutoMap/"
+		echo "校验文件完整性"
+		adb shell "/data/local/tmp/check.sh $filename"
+		echo "修复文件权限"
+		adb shell "chown -R root:root /system/app/AutoMap/"
+		adb shell "chmod -R 755 /system/app/AutoMap/"
+		adb shell "chmod -R 644 /system/app/AutoMap/AutoMap.apk"
+		adb shell "chmod -R 644 /system/app/AutoMap/lib/arm/*"
+		if [[ "$bak" == "0" ]]; then
+			echo "dex2oat优化处理"
+			adb shell "mkdir -p /system/app/AutoMap/oat/arm"
+			adb shell "/system/bin/dex2oat --dex-file=/system/app/AutoMap/AutoMap.apk  --oat-file=/system/app/AutoMap/oat/arm/AutoMap.odex"
+			adb shell "chmod -R 755 /system/app/AutoMap/oat"
+			adb shell "chmod -R 644 /system/app/AutoMap/oat/arm/*"
+			adb shell "ls -la /system/app/AutoMap/oat/arm/*"
+			echo "dex2oat优化处理end"
+		else
+			echo "pass"
+		fi
+		echo "恢复APP状态及还原安装"
+		adb shell "pm enable com.autonavi.amapauto"
+		adb shell "pm unhide com.autonavi.amapauto"
+		adb shell "pm default-state --user 0 com.autonavi.amapauto"
+		echo "测试清理步骤"
+		adb shell "rm -rf /data/system/package_cache/1/AutoMap*"
+		echo "等待10秒后开始还原"
+		sleep 10
+		echo "尝试还原"
+		adb shell "cmd package install-existing com.autonavi.amapauto"
+		echo "查看Packages list信息"
+		adb shell "pm list packages amap"
+		adb shell "pm list packages -u amap"
+		echo "开始检测当前车机的全屏配置规则"
+		adb shell "settings get global policy_control"
+		if [[ "$select_num" == "1" ]];then
+			echo "如使用第三方app全屏或者自定义全屏请在脚本菜单使用全屏选项!!!"
+			echo "Beta版本自带左侧手势侧滑回桌面!!!"
+			sleep 3
+			adb shell "settings put global policy_control null"
+		elif [[ "$select_num" == "33" ]];then
+			echo "快捷键版本将恢复配置为默认设置、会覆盖之前的设置!!!"
+			echo "如使用第三方app全屏或者自定义全屏请在脚本菜单使用全屏选项!!!"
+			adb shell "settings put global policy_control null"
+		elif [[ "$select_num" == "22" ]];then
+			echo "全屏版本将只设置高德为全屏、会覆盖之前的设置!!!"
+			echo "如使用第三方app全屏或者自定义全屏请在脚本菜单使用全屏选项!!!"
+			adb shell "settings put global policy_control immersive.full=com.autonavi.amapauto"
+		elif [[ "$select_num" == "11" ]];then
+			echo "快捷键版本将恢复配置为默认设置、会覆盖之前的设置!!!"
+			echo "如使用第三方app全屏或者自定义全屏请在脚本菜单使用全屏选项!!!"
+			adb shell "settings put global policy_control null"
+		elif [[ "$select_num" == "0" ]];then
+			echo "原厂版本将恢复配置为默认设置、会覆盖之前的设置!!!"
+			echo "如使用第三方app全屏或者自定义全屏请在脚本菜单使用全屏选项!!!"
+			adb shell "settings put global policy_control null"
+		else
+			echo "???"
+		fi
+		echo "开始检测当前车机的全屏配置规则"
+		adb shell "settings get global policy_control"
+		echo "建议配合群文件手势控制软件使用全屏版"
+		ReBoot
+		
+	else
+		echo "预处理失败、请截图反馈"
+		exit 0
+	fi
+    #exit 0
+    
+}
+
 
 function sidemenu()
 {
@@ -601,6 +802,16 @@ function kwkj()
 	adb shell "ls -l /system/priv-app/GwmRadio/GwmRadio.apk"
 	echo "修复文件权限"
 	adb shell "chmod -R 644 /system/priv-app/GwmRadio/GwmRadio.apk"
+	echo "恢复APP状态及还原安装"
+	adb shell "pm enable com.gwmv3.radio"
+	adb shell "pm unhide com.gwmv3.radio"
+	adb shell "pm default-state --user 0 com.gwmv3.radio"
+	#echo "测试清理步骤"
+	#adb shell "rm -rf /data/system/package_cache/1/*"
+	echo "等待1秒后开始还原"
+	sleep 1
+	echo "尝试还原"
+	adb shell "cmd package install-existing com.gwmv3.radio"
 	ReBoot
 
 }
@@ -795,6 +1006,16 @@ function wecarflow()
 	adb shell "chmod -R 755 /system/app/wecarflow/"
 	adb shell "chmod -R 644 /system/app/wecarflow/wecarflow.apk"
 	adb shell "chmod -R 644 /system/app/wecarflow/oat/arm/*"
+	echo "恢复APP状态及还原安装"
+	adb shell "pm enable com.tencent.wecarflow"
+	adb shell "pm unhide com.tencent.wecarflow"
+	adb shell "pm default-state --user 0 com.tencent.wecarflow"
+	#echo "测试清理步骤"
+	#adb shell "rm -rf /data/system/package_cache/1/*"
+	echo "等待1秒后开始还原"
+	sleep 1
+	echo "尝试还原"
+	adb shell "cmd package install-existing com.tencent.wecarflow"
 	ReBoot
 }
 
@@ -889,6 +1110,8 @@ function menu()
 
 *  1.车机高德升级为全屏版|快捷版|还原         *
 
+*  9.车机高德升级为带三指Beta版|还原-灰度测试*
+
 *  2.左侧虚拟音乐按键直接跳转三方音乐-灰度测试*
 
 *  3.工厂模式转为系统应用或还原               *
@@ -938,6 +1161,9 @@ function usage()
             ;;
         8)
             kwkj
+            ;;
+        9)
+            AutoMapBeta
             ;;
         0)
             exit 0
