@@ -154,7 +154,7 @@ function AutoMap()
     AutoMap_Not_Full_Screen_Apk_Url="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/6.5.0.601571/%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE_6.5.0.601571_%E5%B8%A6%E5%BF%AB%E6%8D%B7%E5%AF%BC%E8%88%AA%E6%A0%8F.apk"
 	md52="a4993e1ce81c2e7f96c79749248b52a9"
 	
-	AutoMap_Full_Screen_Apk_Url_Beta="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/6.5.0.601571.beta/9011-dock.apk"
+	AutoMap_Full_Screen_Apk_Url_Beta="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/6.5.0.601571.beta/9011-2212050910.apk"
 	AutoMap_Not_Full_Screen_Apk_Url_Beta="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/6.5.0.601571.beta/6.5.0.601571-9011%E5%B8%A6%E5%BF%AB%E6%8D%B7%E9%94%AE.apk"
 	
     AutoMap_Backup_Zip_Url="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/%E5%8E%9F%E8%BD%A6%E5%A4%87%E4%BB%BD/automap.zip"
@@ -171,7 +171,7 @@ function AutoMap()
     	4)
 			echo "您选择的是三指仪表适配内测全屏版本"
 			AutoMap_Url=$AutoMap_Full_Screen_Apk_Url_Beta
-			md51="2b693bce73d940fc6272b705b16fc5b2"
+			md51="7e47424d463f35b51520c7e8d566f347"
 			Flag=1
 			bak=0
             ;;
@@ -180,7 +180,7 @@ function AutoMap()
 			echo "暂时先用着全屏版本，等后面更新"
 			sleep 5
 			AutoMap_Url=$AutoMap_Full_Screen_Apk_Url_Beta
-			md52="2b693bce73d940fc6272b705b16fc5b2"
+			md52="7e47424d463f35b51520c7e8d566f347"
 			Flag=1
 			bak=0
             ;;
@@ -355,7 +355,7 @@ function AutoMapBeta()
     AutoMap_Not_Full_Screen_Apk_Url="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/6.5.0.601571/%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE_6.5.0.601571_%E5%B8%A6%E5%BF%AB%E6%8D%B7%E5%AF%BC%E8%88%AA%E6%A0%8F.apk"
 	md52="a4993e1ce81c2e7f96c79749248b52a9"
 	
-	AutoMap_Full_Screen_Apk_Url_Beta="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/6.5.0.601571.beta/9011-dock.apk"
+	AutoMap_Full_Screen_Apk_Url_Beta="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/6.5.0.601571.beta/9011-2212050910.apk"
 	AutoMap_Not_Full_Screen_Apk_Url_Beta="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/6.5.0.601571.beta/6.5.0.601571-9011%E5%B8%A6%E5%BF%AB%E6%8D%B7%E9%94%AE.apk"
 	
     AutoMap_Backup_Zip_Url="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/%E5%8E%9F%E8%BD%A6%E5%A4%87%E4%BB%BD/automap.zip"
@@ -372,7 +372,7 @@ function AutoMapBeta()
     	1)
 			echo "您选择的是三指仪表适配内测全屏版本"
 			AutoMap_Url=$AutoMap_Full_Screen_Apk_Url_Beta
-			md51="2b693bce73d940fc6272b705b16fc5b2"
+			md51="7e47424d463f35b51520c7e8d566f347"
 			Flag=1
 			bak=0
             ;;
@@ -381,7 +381,7 @@ function AutoMapBeta()
 			echo "暂时先用着全屏版本，等后面更新"
 			sleep 5
 			AutoMap_Url=$AutoMap_Full_Screen_Apk_Url_Beta
-			md52="2b693bce73d940fc6272b705b16fc5b2"
+			md52="7e47424d463f35b51520c7e8d566f347"
 			Flag=1
 			bak=0
             ;;
@@ -485,7 +485,7 @@ function AutoMapBeta()
 		adb shell "chmod -R 755 /system/app/AutoMap/"
 		adb shell "chmod -R 644 /system/app/AutoMap/AutoMap.apk"
 		adb shell "chmod -R 644 /system/app/AutoMap/lib/arm/*"
-		if [[ "$bak" == "0" ]]; then
+		if [[ "$bak" == "9" ]]; then
 			echo "dex2oat优化处理"
 			adb shell "mkdir -p /system/app/AutoMap/oat/arm"
 			adb shell "/system/bin/dex2oat --dex-file=/system/app/AutoMap/AutoMap.apk  --oat-file=/system/app/AutoMap/oat/arm/AutoMap.odex"
