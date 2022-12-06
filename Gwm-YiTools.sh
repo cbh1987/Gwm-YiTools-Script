@@ -1144,7 +1144,7 @@ function LogSubmit()
     put $Log_file $Log_file
     close
     bye
-    eof
+eof
     echo "end......"
     sleep 5
     exit 0
