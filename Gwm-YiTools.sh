@@ -1137,6 +1137,7 @@ function LogSubmit()
     open magisk.proyy.com
     user log_tmp_20221206 kfbRBSZLM4sGmF6z
     binary
+    passive
     cd /log/
     lcd $Log_Path
     prompt
