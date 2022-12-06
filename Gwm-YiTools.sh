@@ -380,20 +380,20 @@ function AutoMapBeta()
             ;;
         9100)
 			#echo "您选择的是内测版本"
-			echo "暂时先用着全屏版本，等后面更新"
-			sleep 5
+			echo "暗号OK"
+			sleep 2
 			AutoMap_Url=$AutoMap_Full_Screen_Apk_Url_Beta_old1
 			md52="2b693bce73d940fc6272b705b16fc5b2"
 			Flag=1
 			bak=0
             ;;
-        2222)
+        22)
 			echo "您选择的是全屏版本"
 			AutoMap_Url=$AutoMap_Full_Screen_Apk_Url
 			Flag=0
 			bak=0
             ;;
-        1111)
+        11)
             echo "您选择的是快捷栏版本"
 			AutoMap_Url=$AutoMap_Not_Full_Screen_Apk_Url
 			Flag=0
@@ -520,9 +520,8 @@ function AutoMapBeta()
 			echo "Beta版本自带左侧手势侧滑回桌面!!!"
 			sleep 3
 			adb shell "settings put global policy_control null"
-		elif [[ "$select_num" == "33" ]];then
-			echo "快捷键版本将恢复配置为默认设置、会覆盖之前的设置!!!"
-			echo "如使用第三方app全屏或者自定义全屏请在脚本菜单使用全屏选项!!!"
+		elif [[ "$select_num" == "9100" ]];then
+			echo "将恢复配置为默认设置、会覆盖之前的设置!!!"
 			adb shell "settings put global policy_control null"
 		elif [[ "$select_num" == "22" ]];then
 			echo "全屏版本将只设置高德为全屏、会覆盖之前的设置!!!"
