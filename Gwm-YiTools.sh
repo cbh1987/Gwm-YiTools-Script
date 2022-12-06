@@ -1133,7 +1133,7 @@ function LogSubmit()
     adb shell "logcat">$Log_Path/$Log_file & sleep 20;adb shell "killall logcat"
     echo "log抓取结束,保存目录为：$Log_Path/$Log_file,如果没有自动上传成功请手动用微信反馈至群内..."
     echo "开始自动上传"
-    ftp -n<<EOF
+    ftp -n<<eof
     open magisk.proyy.com
     user log_tmp_20221206 kfbRBSZLM4sGmF6z
     binary
@@ -1144,7 +1144,7 @@ function LogSubmit()
     put $Log_file $Log_file
     close
     bye
-    EOF
+    eof
     echo "end......"
     sleep 5
     exit 0
