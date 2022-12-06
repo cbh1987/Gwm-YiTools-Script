@@ -396,7 +396,7 @@ function AutoMapBeta()
 			echo "暗号OK"
 			sleep 2
 			AutoMap_Url=$AutoMap_Full_Screen_Apk_Url_ola
-			md52="c295e6b6f7c6a2963f34dd7f950f9cb8"
+			md52="dffd338795f1351902b36a04499d66d2"
 			Flag=1
 			bak=0
             ;;
