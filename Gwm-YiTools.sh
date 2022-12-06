@@ -1105,6 +1105,52 @@ function rootinstallenger()
     # exit 0
 }
 
+function LogSubmit()
+{
+    echo "将自动抓取30S的log至手机download目录"
+    echo "请务必提前执行：termux-setup-storage,否则没有权限访问存储空间!!!"
+    sleep 2
+    current=`date "+%Y-%m-%d %H:%M:%S"`
+    timeStamp=`date -d "$current" +%s`
+    currentTimeStamp=$((timeStamp*1000+10#`date "+%N"`/1000000))
+    Log_file="AAAA_test_log_$currentTimeStamp.log"
+    Log_Path="/sdcard/Download"
+    echo "当前脚本执行环境检测中....."
+    flag=`echo "check log Permission ???">$Log_Path/$Log_file|grep Permission`
+    if [[ $flag=="" ]];then
+        echo "权限检测通过"
+        echo "pass!!!"
+    else
+    	echo "请务必提前执行：termux-setup-storage,否则没有权限访问存储空间!!!"
+	sleep 5
+	exit 0
+    fi
+    echo "开始...."
+    echo "请提前连接好车机,建议复现bug后再执行!!!"
+    sleep 3
+    Adb_Init
+    echo "log默认将抓取20秒，请耐心等待!!!"
+    adb shell "logcat">$Log_Path/$Log_file & sleep 20;adb shell "killall logcat"
+    echo "log抓取结束,保存目录为：$Log_Path/$Log_file,如果没有自动上传成功请手动用微信反馈至群内..."
+    echo "开始自动上传"
+    ftp -n<<!
+    open magisk.proyy.com
+    user log_tmp_20221206 kfbRBSZLM4sGmF6z
+    binary
+    cd /log/
+    lcd $Log_Path
+    prompt
+    put $Log_file $Log_file
+    close
+    bye
+    !
+    echo "end......"
+    sleep 5
+    exit 0
+}
+
+
+
 function menu()
 {
     cat <<eof
@@ -1168,6 +1214,9 @@ function usage()
             ;;
         9)
             AutoMapBeta
+            ;;
+        9001)
+            LogSubmit
             ;;
         0)
             exit 0
