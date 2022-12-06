@@ -11,6 +11,9 @@
 #
 #
 #
+# Version 1.2.3 2022-12-06
+# fix...
+# Version 1.2.2 2022-12-05
 # Version 1.2.1 2022-12-04
 # 高德beta仪表测试版状态栏透明沉浸
 # Version 1.2 2022-12-03
@@ -891,18 +894,24 @@ function engineer()
 				echo "未能确认请截图给管理员确认!"
 				adb shell "ls -l /system/app/sotainstaller/sotainstaller.apk"
 			fi
-			#adb uninstall com.tencent.enger
-			adb shell "pm uninstall com.tencent.enger  2>/dev/null"
-			adb shell "pm uninstall com.gwm.app.bookshelf  2>/dev/null"
+			echo "恢复APP状态及还原安装"
+			adb shell "pm enable com.tencent.sotainstaller"
+			adb shell "pm unhide com.tencent.sotainstaller"
+			adb shell "pm default-state --user 0 com.tencent.sotainstaller"
+			echo "01"
+			adb shell "cmd package install-existing com.tencent.sotainstaller 2>/dev/null"
+			echo "清理"
+			adb shell "pm uninstall com.tencent.enger  2>/dev/null && pm uninstall com.gwm.app.bookshelf  2>/dev/null"
 			;;
 		2)
 			echo "你选择了回退"
 			filename="enger.apk"
 			echo "安装至普通应用"
 			adb install -r --user all $filename
-			echo "释放原进程"
+			#echo "释放原进程"
 			#adb shell "killall com.tencent.sotainstaller 2>/dev/null"
 			#adb uninstall
+			adb shell "pm default-state --user 0 com.tencent.enger"
 			echo "移除1"
 			adb shell "pm uninstall --user 0 com.tencent.sotainstaller && rm -rf  /system/app/sotainstaller"
 			echo "移除"
