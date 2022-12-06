@@ -359,8 +359,11 @@ function AutoMapBeta()
 	md51="8b42504707d33e0104e16d1a0f1a2149"
     AutoMap_Not_Full_Screen_Apk_Url="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/6.5.0.601571/%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE_6.5.0.601571_%E5%B8%A6%E5%BF%AB%E6%8D%B7%E5%AF%BC%E8%88%AA%E6%A0%8F.apk"
 	md52="a4993e1ce81c2e7f96c79749248b52a9"
+	
 	AutoMap_Full_Screen_Apk_Url_old="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/6.5.0.601571.beta/9011-dock.apk"
 	AutoMap_Full_Screen_Apk_Url_ola="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/6.5.0.601571.beta/6.5.0.601571-9011.apk"
+	AutoMap_Full_Screen_Apk_Url_olbtest="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/6.5.0.601571.beta/9011-test%E5%8A%A0%E8%BD%BD%E4%B8%AD.apk"
+	
 	AutoMap_Full_Screen_Apk_Url_Beta="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/6.5.0.601571.beta/9011-2212050910.apk"
 	AutoMap_Not_Full_Screen_Apk_Url_Beta="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/6.5.0.601571.beta/6.5.0.601571-9011%E5%B8%A6%E5%BF%AB%E6%8D%B7%E9%94%AE.apk"
 	
@@ -397,6 +400,15 @@ function AutoMapBeta()
 			sleep 2
 			AutoMap_Url=$AutoMap_Full_Screen_Apk_Url_ola
 			md52="dffd338795f1351902b36a04499d66d2"
+			Flag=1
+			bak=0
+            ;;
+        9102)
+			#echo "您选择的是内测版本"
+			echo "暗号OK"
+			sleep 2
+			AutoMap_Url=$AutoMap_Full_Screen_Apk_Url_olbtest
+			md52="7e211a7c9759327d7fa195eb098f96c5"
 			Flag=1
 			bak=0
             ;;
@@ -533,10 +545,7 @@ function AutoMapBeta()
 			echo "Beta版本自带左侧手势侧滑回桌面!!!"
 			sleep 3
 			adb shell "settings put global policy_control null"
-		elif [[ "$select_num" == "9100" ]];then
-			echo "将恢复配置为默认设置、会覆盖之前的设置!!!"
-			adb shell "settings put global policy_control null"
-		elif [[ "$select_num" == "9101" ]];then
+		elif [ "$select_num" == "9100" -o "$select_num" == "9101" -o "$select_num" == "9102"];then
 			echo "将恢复配置为默认设置、会覆盖之前的设置!!!"
 			adb shell "settings put global policy_control null"
 		elif [[ "$select_num" == "22" ]];then
