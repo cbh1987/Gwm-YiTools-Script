@@ -477,7 +477,7 @@ function AutoMapBeta()
 			echo "Beta版本自带左侧手势侧滑回桌面!!!"
 			sleep 3
 			adb shell "settings put global policy_control null"
-		elif [[ $select_num =~ "91" ]]
+		elif [[ $select_num =~ "91" ]];then
 			echo "将恢复配置为默认设置、会覆盖之前的设置!!!"
 			adb shell "settings put global policy_control null"
 		elif [[ "$select_num" == "2" ]];then
