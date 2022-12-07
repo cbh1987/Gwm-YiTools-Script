@@ -11,6 +11,9 @@
 #
 #
 #
+# Version 1.2.4 2022-12-07
+# add Beta list menu
+# fix...
 # Version 1.2.3 2022-12-06
 # fix...
 # Version 1.2.2 2022-12-05
@@ -355,20 +358,6 @@ function AutoMap()
 function AutoMapBeta()
 {
 	cd $Work_Path
-    AutoMap_Full_Screen_Apk_Url="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/6.5.0.601571/Auto_6.5.0.601571_release_signed.apk"
-	md51="8b42504707d33e0104e16d1a0f1a2149"
-    AutoMap_Not_Full_Screen_Apk_Url="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/6.5.0.601571/%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE_6.5.0.601571_%E5%B8%A6%E5%BF%AB%E6%8D%B7%E5%AF%BC%E8%88%AA%E6%A0%8F.apk"
-	md52="a4993e1ce81c2e7f96c79749248b52a9"
-	
-	AutoMap_Full_Screen_Apk_Url_old="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/6.5.0.601571.beta/9011-dock.apk"
-	AutoMap_Full_Screen_Apk_Url_ola="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/6.5.0.601571.beta/6.5.0.601571-9011.apk"
-	AutoMap_Full_Screen_Apk_Url_olbtest="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/6.5.0.601571.beta/9011-test%E5%8A%A0%E8%BD%BD%E4%B8%AD.apk"
-	
-	AutoMap_Full_Screen_Apk_Url_Beta="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/6.5.0.601571.beta/9011-2212050910.apk"
-	AutoMap_Not_Full_Screen_Apk_Url_Beta="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/6.5.0.601571.beta/6.5.0.601571-9011%E5%B8%A6%E5%BF%AB%E6%8D%B7%E9%94%AE.apk"
-	
-    AutoMap_Backup_Zip_Url="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/%E5%8E%9F%E8%BD%A6%E5%A4%87%E4%BB%BD/automap.zip"
-	md53="6b77b446d5ce82edfe0b7813b721047d"
 	AutoMap_Check_Script_Url="https://magisk.proyy.com/tmp/check.sh"
 	AutoMap_Apk="AutoMap.apk"
 	AutoMap_Zip="AutoMap.zip"
@@ -376,64 +365,26 @@ function AutoMapBeta()
 	Flag=0
 	bak=0
     #read -p "请输入数字选择升级全屏版|快捷键|回退(2/1/0):" select_num
+    list_url="https://magisk.proyy.com/tmp/automap/beta.csv"
     read -p "请输入数字选择升级三指Beta全屏带返回主页版|回退(1/0):" select_num
-    case $select_num in
-    	1)
-			echo "您选择的是三指仪表适配内测全屏版本"
-			AutoMap_Url=$AutoMap_Full_Screen_Apk_Url_Beta
-			md51="7e47424d463f35b51520c7e8d566f347"
-			Flag=1
-			bak=0
-            ;;
-        9100)
-			#echo "您选择的是内测版本"
-			echo "暗号OK"
-			sleep 2
-			AutoMap_Url=$AutoMap_Full_Screen_Apk_Url_old
-			md52="2b693bce73d940fc6272b705b16fc5b2"
-			Flag=1
-			bak=0
-            ;;
-        9101)
-			#echo "您选择的是内测版本"
-			echo "暗号OK"
-			sleep 2
-			AutoMap_Url=$AutoMap_Full_Screen_Apk_Url_ola
-			md52="dffd338795f1351902b36a04499d66d2"
-			Flag=1
-			bak=0
-            ;;
-        9102)
-			#echo "您选择的是内测版本"
-			echo "暗号OK"
-			sleep 2
-			AutoMap_Url=$AutoMap_Full_Screen_Apk_Url_olbtest
-			md52="7e211a7c9759327d7fa195eb098f96c5"
-			Flag=1
-			bak=0
-            ;;
-        22)
-			echo "您选择的是全屏版本"
-			AutoMap_Url=$AutoMap_Full_Screen_Apk_Url
-			Flag=0
-			bak=0
-            ;;
-        11)
-            echo "您选择的是快捷栏版本"
-			AutoMap_Url=$AutoMap_Not_Full_Screen_Apk_Url
-			Flag=0
-			bak=0
-            ;;
-        0)
-            echo "您选择的是回退至原厂版本"
-			AutoMap_Url=$AutoMap_Backup_Zip_Url
-			Flag=1
-			bak=1
-            ;;
-        *)
-            echo "输入错误"
-            exit 0
-    esac
+    
+    list_data=`curl -ss $list_url|grep "^$select_num,"`
+    #echo "$list_data"
+    if [[ "$list_data" == "" ]];then
+    	echo "输入错误，请截图反馈至管理员，或者确认输入的内容再重试一下"
+	exit 0
+    else
+    	#list菜单
+    	read AutoMap_Url md51 tips bak <<< $(echo "$list_data"|awk -F, '{print $2,$3,$4,$5}')
+    fi
+    if [[ "$AutoMap_Url" == "" ]];then
+    	echo "获取数据失败，请截图反馈至管理员，或者再重试一下"
+    	exit 0
+    else
+    	echo "您选择的是:$select_num:$tips"
+    	sleep 3
+    fi
+
 	filename=""
 	wget -O check.sh $AutoMap_Check_Script_Url
 	if [[ "$bak" == "0" ]]; then
@@ -444,8 +395,8 @@ function AutoMapBeta()
 		cd tmp
 		wget -O $AutoMap_Apk $AutoMap_Url
 		md5a=`md5sum $AutoMap_Apk |awk '{print $1}'`
-		echo "$md5a:$md51:$md52"
-		if [ "$md5a" == "$md51" -o "$md5a" == "$md52" ];then
+		echo "$md5a:$md51"
+		if [[ "$md5a" == "$md51" ]];then
 			echo "开始解包"
 			unzip -o $AutoMap_Apk
 			echo "解包完成..."
@@ -472,7 +423,7 @@ function AutoMapBeta()
 		cd $Work_Path
 		wget -O $AutoMap_Zip $AutoMap_Backup_Zip_Url
 		md5a=`md5sum $AutoMap_Zip |awk '{print $1}'`
-		if [[ "$md5a" == "$md53" ]];then
+		if [[ "$md5a" == "$md51" ]];then
 			rm -rf amap_backup.*
 			unzip -d $Work_Path $AutoMap_Zip
 			ls -l amap_backup*
