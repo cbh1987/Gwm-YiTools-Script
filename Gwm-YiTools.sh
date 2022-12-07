@@ -159,10 +159,6 @@ function AutoMap()
 	md51="8b42504707d33e0104e16d1a0f1a2149"
     AutoMap_Not_Full_Screen_Apk_Url="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/6.5.0.601571/%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE_6.5.0.601571_%E5%B8%A6%E5%BF%AB%E6%8D%B7%E5%AF%BC%E8%88%AA%E6%A0%8F.apk"
 	md52="a4993e1ce81c2e7f96c79749248b52a9"
-	
-	AutoMap_Full_Screen_Apk_Url_Beta="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/6.5.0.601571.beta/9011-2212050910.apk"
-	AutoMap_Not_Full_Screen_Apk_Url_Beta="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/6.5.0.601571.beta/6.5.0.601571-9011%E5%B8%A6%E5%BF%AB%E6%8D%B7%E9%94%AE.apk"
-	
     AutoMap_Backup_Zip_Url="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/%E5%8E%9F%E8%BD%A6%E5%A4%87%E4%BB%BD/automap.zip"
 	md53="6b77b446d5ce82edfe0b7813b721047d"
 	AutoMap_Check_Script_Url="https://magisk.proyy.com/tmp/check.sh"
@@ -172,24 +168,6 @@ function AutoMap()
 	Flag=0
 	bak=0
     read -p "请输入数字选择升级全屏版|快捷键|回退(2/1/0):" select_num
-    #read -p "请输入数字选择升级Beta全屏版|回退(4/0):" select_num
-    case $select_num in
-    	4)
-			echo "您选择的是三指仪表适配内测全屏版本"
-			AutoMap_Url=$AutoMap_Full_Screen_Apk_Url_Beta
-			md51="7e47424d463f35b51520c7e8d566f347"
-			Flag=1
-			bak=0
-            ;;
-        3)
-			#echo "您选择的是三指仪表适配内测快捷栏版本"
-			echo "暂时先用着全屏版本，等后面更新"
-			sleep 5
-			AutoMap_Url=$AutoMap_Full_Screen_Apk_Url_Beta
-			md52="7e47424d463f35b51520c7e8d566f347"
-			Flag=1
-			bak=0
-            ;;
         2)
 			echo "您选择的是全屏版本"
 			AutoMap_Url=$AutoMap_Full_Screen_Apk_Url
@@ -497,10 +475,10 @@ function AutoMapBeta()
 			echo "Beta版本自带左侧手势侧滑回桌面!!!"
 			sleep 3
 			adb shell "settings put global policy_control null"
-		elif [ "$select_num" == "9100" -o "$select_num" == "9101" -o "$select_num" == "9102"];then
+		elif [[ $select_num =~ "91" ]]
 			echo "将恢复配置为默认设置、会覆盖之前的设置!!!"
 			adb shell "settings put global policy_control null"
-		elif [[ "$select_num" == "22" ]];then
+		elif [[ "$select_num" == "2" ]];then
 			echo "全屏版本将只设置高德为全屏、会覆盖之前的设置!!!"
 			echo "如使用第三方app全屏或者自定义全屏请在脚本菜单使用全屏选项!!!"
 			adb shell "settings put global policy_control immersive.full=com.autonavi.amapauto"
