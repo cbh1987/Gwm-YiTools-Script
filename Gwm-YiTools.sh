@@ -168,6 +168,8 @@ function AutoMap()
 	Flag=0
 	bak=0
     read -p "请输入数字选择升级全屏版|快捷键|回退(2/1/0):" select_num
+    
+    case $select_num in
         2)
 			echo "您选择的是全屏版本"
 			AutoMap_Url=$AutoMap_Full_Screen_Apk_Url
