@@ -13,6 +13,7 @@
 #
 # Version 1.2.4 2022-12-07
 # add Beta list menu
+# fix settings 
 # fix...
 # Version 1.2.3 2022-12-06
 # fix...
