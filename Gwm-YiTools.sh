@@ -421,7 +421,8 @@ function AutoMapBeta()
 	else
 		echo "开始回退预处理"
 		cd $Work_Path
-		wget -O $AutoMap_Zip $AutoMap_Backup_Zip_Url
+		#wget -O $AutoMap_Zip $AutoMap_Backup_Zip_Url
+		wget -O $AutoMap_Zip $AutoMap_Url
 		md5a=`md5sum $AutoMap_Zip |awk '{print $1}'`
 		if [[ "$md5a" == "$md51" ]];then
 			rm -rf amap_backup.*
