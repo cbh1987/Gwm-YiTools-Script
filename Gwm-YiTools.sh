@@ -433,7 +433,11 @@ function AutoMapBeta()
 		adb shell "rm -rf /system/app/AutoMap/*"
 		echo "测试清理用户目录"
 		adb shell "rm -rf /data/user/0/com.autonavi.amapauto"
+		adb shell "rm -rf /data/user_de/0/com.autonavi.amapauto"
 		adb shell "rm -rf /data/app/*/com.autonavi.amapauto*"
+		adb shell "rm -rf /data/media/0/amapauto9"
+		adb shell "rm -rf /sdcard/amapauto9"
+		adb shell "rm -rf /sdcard/Android/data/com.autonavi.amapauto"
 		echo "上传替换高德包"
 		adb push $filename /data/local/tmp/
 		adb push $filename.md5 /data/local/tmp/
