@@ -431,6 +431,9 @@ function AutoMapBeta()
 		adb shell "pm list packages -u amap"
 		echo "删除原车高德地图系统文件"
 		adb shell "rm -rf /system/app/AutoMap/*"
+		echo "测试清理用户目录"
+		adb shell "rm -rf /data/user/0/com.autonavi.amapauto"
+		adb shell "rm -rf /data/app/*/com.autonavi.amapauto*"
 		echo "上传替换高德包"
 		adb push $filename /data/local/tmp/
 		adb push $filename.md5 /data/local/tmp/
