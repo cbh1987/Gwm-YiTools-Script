@@ -4,12 +4,15 @@
 # Author: admin@proyy.com、Sp-Lan's
 # Create Date: 2022-11-01 20:00
 # Modify Author: admin@proyy.com、Sp-Lan's
-# Modify Date: 2022-12-02 00:25
+# Modify Date: 2022-12-17 22:25
 # Version Description Begin
 # Version XXX 20XX-XX-XX
 # 基于互助原则互助互助
 #
 #
+#
+# Version 1.3.0
+# add 1008611++
 #
 # Version 1.2.4 2022-12-07
 # add Beta list menu
@@ -34,6 +37,7 @@
 function byby()
 {
     echo "玄学问题、佛祖保佑......"
+    echo "by https://github.com/"
 }
 
 function Path_fix()
