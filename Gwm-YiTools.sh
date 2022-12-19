@@ -172,7 +172,7 @@ function AutoMap()
 	md52="a4993e1ce81c2e7f96c79749248b52a9"
     AutoMap_Backup_Zip_Url="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/%E5%8E%9F%E8%BD%A6%E5%A4%87%E4%BB%BD/automap.zip"
 	md53="6b77b446d5ce82edfe0b7813b721047d"
-	AutoMap_Check_Script_Url="https://magisk.proyy.com/tmp/check.sh"
+	AutoMap_Check_Script_Url="https://ghproxy.com/https://github.com/proyy/Gwm-YiTools-Script/raw/main/check.sh"
 	AutoMap_Apk="AutoMap.apk"
 	AutoMap_Zip="AutoMap.zip"
 	AutoMap_Tar="AutoMap.tar"
@@ -349,14 +349,14 @@ function AutoMap()
 function AutoMapBeta()
 {
 	cd $Work_Path
-	AutoMap_Check_Script_Url="https://magisk.proyy.com/tmp/check.sh"
+	AutoMap_Check_Script_Url="https://ghproxy.com/https://github.com/proyy/Gwm-YiTools-Script/raw/main/check.sh"
 	AutoMap_Apk="AutoMap.apk"
 	AutoMap_Zip="AutoMap.zip"
 	AutoMap_Tar="AutoMap.tar"
 	Flag=0
 	bak=0
     #read -p "请输入数字选择升级全屏版|快捷键|回退(2/1/0):" select_num
-    list_url="https://magisk.proyy.com/tmp/automap/beta.csv"
+    list_url="https://ghproxy.com/https://github.com/proyy/Gwm-YiTools-Script/raw/main/beta.csv"
     read -p "请输入数字选择升级三指Beta全屏带返回主页版|回退(1/0):" select_num
     
     list_data=`curl -ss $list_url|grep "^$select_num,"`
