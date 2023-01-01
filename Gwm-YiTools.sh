@@ -9,7 +9,7 @@
 # Version XXX 20XX-XX-XX
 # 基于互助原则互助互助
 #
-#
+#For more updates, visit https://magisk.proyy.com/tmp/note.md
 #
 # Version 1.3.0
 # add 1008611++
@@ -36,8 +36,11 @@
 
 function byby()
 {
+    clear
+    wget -O note.md https://ghproxy.com/https://github.com/proyy/Gwm-YiTools-Script/raw/main/note.md >/dev/null 2>&1 && cat note.md
     echo "玄学问题、佛祖保佑......"
-    echo "by https://github.com/"
+    echo "by https://github.com/proyy/Gwm-YiTools-Script"
+    sleep 5
 }
 
 function Path_fix()
@@ -54,6 +57,7 @@ function Path_fix()
 function Env_fix()
 {
     #Env_fix
+    clear
     Alpine_Env_Check="/etc/apk/repositories"
     Termux_Env_Check="/etc/apt/sources.list"
     CentOS_Env_Check="/etc/redhat-release"
@@ -61,16 +65,16 @@ function Env_fix()
     if [  -f "$Alpine_Env_Check"  ];then
         echo "当前为ish shell Alpine环境，安卓也可使用Termux执行本脚本"
         sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
-        apk update
-        apk add android-tools wget unzip bash curl
+        apk update  >/dev/null 2>&1
+        apk add android-tools wget unzip bash curl  >/dev/null 2>&1
     elif [  -f "$PREFIX/$Termux_Env_Check"  ];then
         echo "当前为Termux shell环境,苹果也可使用ish shell执行本脚本"
         sed -i 's@^\(deb.*stable main\)$@#\1\ndeb https://mirrors.tuna.tsinghua.edu.cn/termux/apt/termux-main stable main@' $PREFIX/etc/apt/sources.list
-        apt update -y
-        apt -o DPkg::Options::="--force-confnew"  upgrade -y
+        apt update -y  >/dev/null 2>&1
+        apt -o DPkg::Options::="--force-confnew"  upgrade -y  >/dev/null 2>&1
         sed -i 's@^\(deb.*stable main\)$@#\1\ndeb https://mirrors.tuna.tsinghua.edu.cn/termux/apt/termux-main stable main@' $PREFIX/etc/apt/sources.list
-        apt update -y
-        pkg install iproute2 android-tools wget -y
+        apt update -y  >/dev/null 2>&1
+        pkg install iproute2 android-tools wget -y  >/dev/null 2>&1
     elif [  -f "$CentOS_Env_Check"  ];then
         echo "当前为CentOS shell环境,苹果、安卓也可执行本脚本"
         echo "自动退出有时间加上"
@@ -166,43 +170,33 @@ function ReBoot()
 function AutoMap()
 {
 	cd $Work_Path
-    AutoMap_Full_Screen_Apk_Url="http://bt.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/6.5.0.601571/Auto_6.5.0.601571_release_signed.apk?sign=vBvn29fDd9-MT0NfWS0ZoBk-BqbbZJhuW3hq68lWIRo=:0"
-	md51="8b42504707d33e0104e16d1a0f1a2149"
-    AutoMap_Not_Full_Screen_Apk_Url="http://bt.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/6.5.0.601571/%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE_6.5.0.601571_%E5%B8%A6%E5%BF%AB%E6%8D%B7%E5%AF%BC%E8%88%AA%E6%A0%8F.apk?sign=7rTUEcu60k8j83KWnw-4NkA186B6o50Gb8-YsaAeAdE=:0"
-	md52="a4993e1ce81c2e7f96c79749248b52a9"
-    AutoMap_Backup_Zip_Url="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E9%AB%98%E5%BE%B7%E8%BD%A6%E6%9C%BA%E7%89%88/%E5%8E%9F%E8%BD%A6%E5%A4%87%E4%BB%BD/automap.zip"
-	md53="6b77b446d5ce82edfe0b7813b721047d"
 	AutoMap_Check_Script_Url="https://magisk.proyy.com/tmp/check.sh"
 	AutoMap_Apk="AutoMap.apk"
 	AutoMap_Zip="AutoMap.zip"
 	AutoMap_Tar="AutoMap.tar"
 	Flag=0
 	bak=0
+    #read -p "请输入数字选择升级全屏版|快捷键|回退(2/1/0):" select_num
+    list_url="https://magisk.proyy.com/tmp/automap/stable.csv"
     read -p "请输入数字选择升级全屏版|快捷键|回退(2/1/0):" select_num
     
-    case $select_num in
-        2)
-			echo "您选择的是全屏版本"
-			AutoMap_Url=$AutoMap_Full_Screen_Apk_Url
-			Flag=0
-			bak=0
-            ;;
-        1)
-            echo "您选择的是快捷栏版本"
-			AutoMap_Url=$AutoMap_Not_Full_Screen_Apk_Url
-			Flag=0
-			bak=0
-            ;;
-        0)
-            echo "您选择的是回退至原厂版本"
-			AutoMap_Url=$AutoMap_Backup_Zip_Url
-			Flag=1
-			bak=1
-            ;;
-        *)
-            echo "输入错误"
-            exit 0
-    esac
+    list_data=`curl -ss $list_url|grep "^$select_num,"`
+    #echo "$list_data"
+    if [[ "$list_data" == "" ]];then
+    	echo "输入错误，请截图反馈至管理员，或者确认输入的内容再重试一下"
+	exit 0
+    else
+    	#list菜单
+    	read AutoMap_Url md51 tips bak <<< $(echo "$list_data"|awk -F, '{print $2,$3,$4,$5}')
+    fi
+    if [[ "$AutoMap_Url" == "" ]];then
+    	echo "获取数据失败，请截图反馈至管理员，或者保持网络畅通再重试一下"
+    	exit 0
+    else
+    	echo "您选择的是:$select_num:$tips"
+    	sleep 3
+    fi
+
 	filename=""
 	wget -O check.sh $AutoMap_Check_Script_Url
 	if [[ "$bak" == "0" ]]; then
@@ -213,8 +207,8 @@ function AutoMap()
 		cd tmp
 		wget -O $AutoMap_Apk $AutoMap_Url
 		md5a=`md5sum $AutoMap_Apk |awk '{print $1}'`
-		echo "$md5a:$md51:$md52"
-		if [ "$md5a" == "$md51" -o "$md5a" == "$md52" ];then
+		echo "$md5a:$md51"
+		if [[ "$md5a" == "$md51" ]];then
 			echo "开始解包"
 			unzip -o $AutoMap_Apk
 			echo "解包完成..."
@@ -239,9 +233,10 @@ function AutoMap()
 	else
 		echo "开始回退预处理"
 		cd $Work_Path
-		wget -O $AutoMap_Zip $AutoMap_Backup_Zip_Url
+		#wget -O $AutoMap_Zip $AutoMap_Backup_Zip_Url
+		wget -O $AutoMap_Zip $AutoMap_Url
 		md5a=`md5sum $AutoMap_Zip |awk '{print $1}'`
-		if [[ "$md5a" == "$md53" ]];then
+		if [[ "$md5a" == "$md51" ]];then
 			rm -rf amap_backup.*
 			unzip -d $Work_Path $AutoMap_Zip
 			ls -l amap_backup*
@@ -357,6 +352,10 @@ function AutoMapBeta()
 	bak=0
     #read -p "请输入数字选择升级全屏版|快捷键|回退(2/1/0):" select_num
     list_url="https://magisk.proyy.com/tmp/automap/beta.csv"
+    echo "Tips:输入命令后下载失败一般是直链获取失败反馈管理修复即可"
+    echo "1#当前最新测试版命令为:9300"
+    echo "2#下一更新版本正在测试中(修复方向问题)"
+    echo ""
     read -p "请输入数字选择升级三指Beta全屏带返回主页版|回退(1/0):" select_num
     
     list_data=`curl -ss $list_url|grep "^$select_num,"`
@@ -369,7 +368,7 @@ function AutoMapBeta()
     	read AutoMap_Url md51 tips bak <<< $(echo "$list_data"|awk -F, '{print $2,$3,$4,$5}')
     fi
     if [[ "$AutoMap_Url" == "" ]];then
-    	echo "获取数据失败，请截图反馈至管理员，或者再重试一下"
+    	echo "获取数据失败，请截图反馈至管理员，或者保持网络畅通再重试一下"
     	exit 0
     else
     	echo "您选择的是:$select_num:$tips"
@@ -737,7 +736,7 @@ function kwkj()
 	mkdir $kwdir
 	cd $kwdir
 	Adb_Init
-	bak_apk_url="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E5%BF%AB%E6%8D%B7%E9%85%B7%E6%88%91/backup/GwmRadio.apk"
+	bak_apk_url="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E5%BF%AB%E6%8D%B7%E9%85%B7%E6%88%91/backup/GwmRadio.apk?sign=t0r6r1-WxqbKal7UilLOj8inpNOneWLnDWLQ8oBIvp8=:0"
 	new_apk_url=""
 	# printf "请选择适配还是回退(1适配/2回退): "
 	# read num
@@ -810,7 +809,7 @@ function engineer()
 	check=0
 	md5a=`md5sum $apk |awk '{print $1}'`
 	[ "$md5a" == "e271fb9a8f3ed46cf1b18becaf6511e4" ]&&echo "校验成功"||check=1
-	[ "$check" == "1" ]&&wget -O $apk "http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/enginner/sotainstaller.apk"||echo "ok"
+	[ "$check" == "1" ]&&wget -O $apk "http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/enginner/sotainstaller.apk?sign=oJeaUOObve-Cowbn-h-xDX5azYICMP8L11J8mwrHlVY=:0"||echo "ok"
 
 	check=0
 	if [  -f "$bakfile_check"  ]; then
@@ -818,7 +817,7 @@ function engineer()
 		 du -sh $bakfile_check
 	else
 		 echo "文件不存在，开始拉..."
-		 wget -O $apk "http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/enginner/sotainstaller.apk"
+		 wget -O $apk "http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/enginner/sotainstaller.apk?sign=oJeaUOObve-Cowbn-h-xDX5azYICMP8L11J8mwrHlVY=:0"
 		 md5a=`md5sum $apk |awk '{print $1}'`
 		[ "$md5a" == "e271fb9a8f3ed46cf1b18becaf6511e4" ]&&echo "校验成功下载完成"||check=1
 		[ "$check" == "1" ]&&echo "下载失败请联系管理员!:$md5a"||echo "ok"
@@ -833,9 +832,9 @@ function engineer()
 		[ "$md5a" == "7f78461d60cb9a5e09fbfab53bc21c64" ]&&echo "校验成功"||check=1
 		[ "$check" == "1" ]&&echo "失败请联系管理员!:$md5a"||echo "ok"
 		[ "$check" == "1" ]&&echo "重试中......."||echo "ok"
-		[ "$check" == "1" ]&&wget -O enger.apk "http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/enginner/enger.apk"||echo "ok"
+		[ "$check" == "1" ]&&wget -O enger.apk "http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/enginner/enger.apk?sign=2UGZh2_G_Fuwj_TnxtbYNoqudif7SAUd4JcaHbzfns8=:0"||echo "ok"
 	else
-		 wget -O enger.apk "http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/enginner/enger.apk"
+		 wget -O enger.apk "http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/enginner/enger.apk?sign=2UGZh2_G_Fuwj_TnxtbYNoqudif7SAUd4JcaHbzfns8=:0"
 		md5a=`md5sum enger.apk |awk '{print $1}'`
 		[ "$md5a" == "7f78461d60cb9a5e09fbfab53bc21c64" ]&&echo "校验成功下载完成"||check=1
 		[ "$check" == "1" ]&&echo "下载失败请联系管理员!:$md5a"||echo "ok"
@@ -943,7 +942,7 @@ function wecarflow()
 		 [ "$check" == "1" ]&&echo "本地备份校验失败将执行清理操作并拉取网络备份!!!"||echo "ok"
 		 [ "$check" == "1" ]&&rm -rf $bakfile_check ||echo "ok"
 		 [ "$check" == "1" ]&&rm -rf $bakfile_check.md5 ||echo "ok"
-		 [ "$check" == "1" ]&&wget -O wecarflow_backup.zip "http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E7%88%B1%E8%B6%A3%E5%90%AC%E5%A4%87%E4%BB%BD/wecarflow_backup.zip" ||echo "ok"
+		 [ "$check" == "1" ]&&wget -O wecarflow_backup.zip "http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E7%88%B1%E8%B6%A3%E5%90%AC%E5%A4%87%E4%BB%BD/wecarflow_backup.zip?sign=ArXIsaEAVMAd_ztB87eBiqnXJ_SY9okflMDscQeEAjM=:0" ||echo "ok"
 		 [ "$check" == "1" ]&&unzip -d $aqdir wecarflow_backup.zip ||echo "ok"
 		 echo "请确认备份文件大小是否正常,$bak_tar_size左右"
 		 du -sh $bakfile_check
@@ -957,7 +956,7 @@ function wecarflow()
 	case $num in
 		1)
 			echo "你选择了升级爱趣听至2.6版本"
-			wget -O wecarflow.tar  "http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E7%88%B1%E8%B6%A3%E5%90%AC%E5%A4%87%E4%BB%BD/%E7%88%B1%E8%B6%A3%E5%90%AC2.6.tar"
+			wget -O wecarflow.tar  "http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E7%88%B1%E8%B6%A3%E5%90%AC%E5%A4%87%E4%BB%BD/%E7%88%B1%E8%B6%A3%E5%90%AC2.6.tar?sign=QpKZErqeT_q-Yo9HpP81DKWF-zKp_3ycTL2MDZxDbQk=:0"
 			filename="wecarflow.tar"
 			echo "5830d10b16622ce21a6c4cf7ade23225"
 			md5a=`md5sum $filename |awk '{print $1}'`
@@ -1222,6 +1221,5 @@ Path_fix
 Env_fix
 #CheckUpdate
 byby
-sleep 5
 clear
 main
