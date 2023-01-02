@@ -9,7 +9,7 @@
 # Version XXX 20XX-XX-XX
 # 基于互助原则互助互助
 #
-#For more updates, visit https://magisk.proyy.com/tmp/note.md
+#For more updates, visit https://github.com/proyy/Gwm-YiTools-Script/raw/main/note.md
 #
 # Version 1.3.0
 # add 1008611++
@@ -37,10 +37,12 @@
 function byby()
 {
     clear
-    wget -O note.md https://ghproxy.com/https://github.com/proyy/Gwm-YiTools-Script/raw/main/note.md >/dev/null 2>&1 && cat note.md
+    #echo ""
+    echo "开始获取更新内容......"
+    wget -T 3 -O note.md https://magisk.proyy.com/tmp/note.md >/dev/null 2>&1 && cat note.md|head -n 15
     echo "玄学问题、佛祖保佑......"
     echo "by https://github.com/proyy/Gwm-YiTools-Script"
-    sleep 5
+    sleep 10
 }
 
 function Path_fix()
@@ -64,11 +66,13 @@ function Env_fix()
     echo "当前脚本执行环境检测中....."
     if [  -f "$Alpine_Env_Check"  ];then
         echo "当前为ish shell Alpine环境，安卓也可使用Termux执行本脚本"
+        echo "请稍等..."
         sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
         apk update  >/dev/null 2>&1
         apk add android-tools wget unzip bash curl  >/dev/null 2>&1
     elif [  -f "$PREFIX/$Termux_Env_Check"  ];then
         echo "当前为Termux shell环境,苹果也可使用ish shell执行本脚本"
+        echo "请稍等..."
         sed -i 's@^\(deb.*stable main\)$@#\1\ndeb https://mirrors.tuna.tsinghua.edu.cn/termux/apt/termux-main stable main@' $PREFIX/etc/apt/sources.list
         apt update -y  >/dev/null 2>&1
         apt -o DPkg::Options::="--force-confnew"  upgrade -y  >/dev/null 2>&1
@@ -83,6 +87,8 @@ function Env_fix()
         echo "环境异常，自动退出"
         exit 0
     fi
+    echo "Env_fix done!"
+    sleep 2
 }
 
 function CheckUpdate()
@@ -343,6 +349,7 @@ function AutoMap()
 
 function AutoMapBeta()
 {
+    clear
 	cd $Work_Path
 	AutoMap_Check_Script_Url="https://magisk.proyy.com/tmp/check.sh"
 	AutoMap_Apk="AutoMap.apk"
@@ -353,10 +360,8 @@ function AutoMapBeta()
     #read -p "请输入数字选择升级全屏版|快捷键|回退(2/1/0):" select_num
     list_url="https://magisk.proyy.com/tmp/automap/beta.csv"
     echo "Tips:输入命令后下载失败一般是直链获取失败反馈管理修复即可"
-    echo "1#当前最新测试版命令为:9300"
-    echo "2#下一更新版本正在测试中(修复方向问题)"
-    echo ""
-    read -p "请输入数字选择升级三指Beta全屏带返回主页版|回退(1/0):" select_num
+    wget -T 3 -O note.md https://magisk.proyy.com/tmp/note.md >/dev/null 2>&1 && cat note.md|head -n 15
+    read -p "请根据提示输入数字选择|或者回退(9301/9302/0):" select_num
     
     list_data=`curl -ss $list_url|grep "^$select_num,"`
     #echo "$list_data"
