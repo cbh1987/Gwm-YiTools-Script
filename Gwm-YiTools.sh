@@ -33,16 +33,38 @@
 # Function:Menu...
 #***************************************************************#
 #begin
-
+#tools
+function policy_control_z()
+{
+package_name=$1
+policy_control=`adb shell "settings get global policy_control"|awk -F"=" '{print $2}'`
+result=$(echo $policy_control | grep "${package_name}")
+if [[ "$result" != "" ]];then
+  echo "$package_name已存在policy"
+else
+  echo "$package_name添加进policy"
+  if [[ "$policy_control" == "" ]];then
+    echo "获取policy_control为空"
+    adb shell "settings put global policy_control immersive.full=$package_name"
+  elif [[ "$policy_control" == "*" ]];then
+    echo "adb shell \"settings put global policy_control immersive.full=$package_name\""
+    adb shell "settings put global policy_control immersive.full=$package_name"
+  else
+    echo "adb shell \"settings put global policy_control immersive.full=$policy_control,$package_name\""
+    adb shell "settings put global policy_control immersive.full=$policy_control,$package_name"
+  fi
+fi
+}
+#tips
 function byby()
 {
     clear
     #echo ""
     echo "开始获取更新内容......"
-    wget -T 3 -O note.md https://magisk.proyy.com/tmp/note.md >/dev/null 2>&1 && cat note.md|head -n 15
+    wget -T 3 -O note.md https://magisk.proyy.com/tmp/note.md >/dev/null 2>&1 && cat note.md|head -n 11
     echo "玄学问题、佛祖保佑......"
     echo "by https://github.com/proyy/Gwm-YiTools-Script"
-    sleep 10
+    sleep 5
 }
 
 function Path_fix()
@@ -184,7 +206,7 @@ function AutoMap()
 	bak=0
     #read -p "请输入数字选择升级全屏版|快捷键|回退(2/1/0):" select_num
     list_url="https://magisk.proyy.com/tmp/automap/stable.csv"
-    read -p "请输入数字选择升级全屏版|快捷键|回退(2/1/0):" select_num
+    read -p "请输入数字升级6.6全屏非适配版|快捷键|回退(2/1/0):" select_num
     
     list_data=`curl -ss $list_url|grep "^$select_num,"`
     #echo "$list_data"
@@ -204,19 +226,19 @@ function AutoMap()
     fi
 
 	filename=""
-	wget -O check.sh $AutoMap_Check_Script_Url
+	wget -q --show-progress -O check.sh $AutoMap_Check_Script_Url
 	if [[ "$bak" == "0" ]]; then
 		echo "开始升级预处理"
 		cd $Work_Path
 		rm -rf tmp
 		mkdir tmp
 		cd tmp
-		wget -O $AutoMap_Apk $AutoMap_Url
+		wget -q --show-progress -O $AutoMap_Apk $AutoMap_Url
 		md5a=`md5sum $AutoMap_Apk |awk '{print $1}'`
 		echo "$md5a:$md51"
 		if [[ "$md5a" == "$md51" ]];then
 			echo "开始解包"
-			unzip -o $AutoMap_Apk
+			unzip -o $AutoMap_Apk >/dev/null 2>&1
 			echo "解包完成..."
 			echo "开始打包必要文件"
 			rm -rf automap
@@ -239,12 +261,12 @@ function AutoMap()
 	else
 		echo "开始回退预处理"
 		cd $Work_Path
-		#wget -O $AutoMap_Zip $AutoMap_Backup_Zip_Url
-		wget -O $AutoMap_Zip $AutoMap_Url
+		#wget -q --show-progress -O $AutoMap_Zip $AutoMap_Backup_Zip_Url
+		wget -q --show-progress -O $AutoMap_Zip $AutoMap_Url
 		md5a=`md5sum $AutoMap_Zip |awk '{print $1}'`
 		if [[ "$md5a" == "$md51" ]];then
 			rm -rf amap_backup.*
-			unzip -d $Work_Path $AutoMap_Zip
+			unzip -d $Work_Path $AutoMap_Zip >/dev/null 2>&1
 			ls -l amap_backup*
 			echo "预处理完成"
 			filename="amap_backup.tar"
@@ -320,9 +342,10 @@ function AutoMap()
 			echo "如使用第三方app全屏或者自定义全屏请在脚本菜单使用全屏选项!!!"
 			adb shell "settings put global policy_control null"
 		elif [[ "$select_num" == "2" ]];then
-			echo "全屏版本将只设置高德为全屏、会覆盖之前的设置!!!"
+			#echo "全屏版本将只设置高德为全屏、会覆盖之前的设置!!!"
 			echo "如使用第三方app全屏或者自定义全屏请在脚本菜单使用全屏选项!!!"
-			adb shell "settings put global policy_control immersive.full=com.autonavi.amapauto"
+			#adb shell "settings put global policy_control immersive.full=com.autonavi.amapauto"
+			policy_control_z "com.autonavi.amapauto"
 		elif [[ "$select_num" == "1" ]];then
 			echo "快捷键版本将恢复配置为默认设置、会覆盖之前的设置!!!"
 			echo "如使用第三方app全屏或者自定义全屏请在脚本菜单使用全屏选项!!!"
@@ -360,8 +383,8 @@ function AutoMapBeta()
     #read -p "请输入数字选择升级全屏版|快捷键|回退(2/1/0):" select_num
     list_url="https://magisk.proyy.com/tmp/automap/beta.csv"
     echo "Tips:输入命令后下载失败一般是直链获取失败反馈管理修复即可"
-    wget -T 3 -O note.md https://magisk.proyy.com/tmp/note.md >/dev/null 2>&1 && cat note.md|head -n 15
-    read -p "请根据提示输入数字选择|或者回退(9301/9302/0):" select_num
+    wget -T 3 -O note.md https://magisk.proyy.com/tmp/note.md >/dev/null 2>&1 && cat note.md|head -n 11
+    read -p "请根据提示输入数字选择|或者回退(9304/0):" select_num
     
     list_data=`curl -ss $list_url|grep "^$select_num,"`
     #echo "$list_data"
@@ -381,19 +404,19 @@ function AutoMapBeta()
     fi
 
 	filename=""
-	wget -O check.sh $AutoMap_Check_Script_Url
+	wget -q --show-progress -O check.sh $AutoMap_Check_Script_Url
 	if [[ "$bak" == "0" ]]; then
 		echo "开始升级预处理"
 		cd $Work_Path
 		rm -rf tmp
 		mkdir tmp
 		cd tmp
-		wget -O $AutoMap_Apk $AutoMap_Url
+		wget -q --show-progress -O $AutoMap_Apk $AutoMap_Url
 		md5a=`md5sum $AutoMap_Apk |awk '{print $1}'`
 		echo "$md5a:$md51"
 		if [[ "$md5a" == "$md51" ]];then
 			echo "开始解包"
-			unzip -o $AutoMap_Apk
+			unzip -o $AutoMap_Apk >/dev/null 2>&1
 			echo "解包完成..."
 			echo "开始打包必要文件"
 			rm -rf automap
@@ -401,7 +424,7 @@ function AutoMapBeta()
 			mv lib/armeabi-v7a automap/lib/arm
 			cp $AutoMap_Apk automap/AutoMap.apk
 			rm -rf $Work_Path/$AutoMap_Tar
-			cd automap/ && tar -cvpf $Work_Path/$AutoMap_Tar *
+			cd automap/ && tar -cvpf $Work_Path/$AutoMap_Tar * >/dev/null 2>&1
 			find ./ -type f -print0|xargs -0 md5sum >$Work_Path/$AutoMap_Tar.md5
 			sed -i 's/.\//\/system\/app\/AutoMap\//' $Work_Path/$AutoMap_Tar.md5
 			cd $Work_Path/ && rm -rf $Work_Path/tmp 
@@ -416,12 +439,12 @@ function AutoMapBeta()
 	else
 		echo "开始回退预处理"
 		cd $Work_Path
-		#wget -O $AutoMap_Zip $AutoMap_Backup_Zip_Url
-		wget -O $AutoMap_Zip $AutoMap_Url
+		#wget -q --show-progress -O $AutoMap_Zip $AutoMap_Backup_Zip_Url
+		wget -q --show-progress -O $AutoMap_Zip $AutoMap_Url
 		md5a=`md5sum $AutoMap_Zip |awk '{print $1}'`
 		if [[ "$md5a" == "$md51" ]];then
 			rm -rf amap_backup.*
-			unzip -d $Work_Path $AutoMap_Zip
+			unzip -d $Work_Path $AutoMap_Zip >/dev/null 2>&1
 			ls -l amap_backup*
 			echo "预处理完成"
 			filename="amap_backup.tar"
@@ -494,18 +517,25 @@ function AutoMapBeta()
 		adb shell "pm clear com.autonavi.amapauto"
 		echo "开始检测当前车机的全屏配置规则"
 		adb shell "settings get global policy_control"
+		#echo $select_num
 		if [[ "$select_num" == "1" ]];then
 			echo "如使用第三方app全屏或者自定义全屏请在脚本菜单使用全屏选项!!!"
 			echo "Beta版本自带左侧手势侧滑回桌面!!!"
 			sleep 3
 			adb shell "settings put global policy_control null"
+		elif [[ "$select_num" == "9302" ]];then
+			#echo "全屏版本将只设置高德为全屏、会覆盖之前的设置!!!"
+			echo "如使用第三方app全屏或者自定义全屏请在脚本菜单使用全屏选项!!!"
+			#adb shell "settings put global policy_control immersive.full=com.autonavi.amapauto"
+			policy_control_z "com.autonavi.amapauto"
 		elif [[ $select_num =~ "91" ]];then
 			echo "将恢复配置为默认设置、会覆盖之前的设置!!!"
 			adb shell "settings put global policy_control null"
 		elif [[ "$select_num" == "2" ]];then
-			echo "全屏版本将只设置高德为全屏、会覆盖之前的设置!!!"
+			#echo "全屏版本将只设置高德为全屏、会覆盖之前的设置!!!"
 			echo "如使用第三方app全屏或者自定义全屏请在脚本菜单使用全屏选项!!!"
-			adb shell "settings put global policy_control immersive.full=com.autonavi.amapauto"
+			#adb shell "settings put global policy_control immersive.full=com.autonavi.amapauto"
+			policy_control_z "com.autonavi.amapauto"
 		elif [[ "$select_num" == "11" ]];then
 			echo "快捷键版本将恢复配置为默认设置、会覆盖之前的设置!!!"
 			echo "如使用第三方app全屏或者自定义全屏请在脚本菜单使用全屏选项!!!"
@@ -519,7 +549,7 @@ function AutoMapBeta()
 		fi
 		echo "开始检测当前车机的全屏配置规则"
 		adb shell "settings get global policy_control"
-		echo "建议配合群文件手势控制软件使用全屏版"
+		#echo "建议配合群文件手势控制软件使用全屏版"
 		ReBoot
 		
 	else
@@ -562,13 +592,13 @@ function sidemenu()
 	sleep 5
 	Adb_Init
 	#需要继续完善适配
-	bak_apk_url="http://magisk.proyy.com:5201/d/123/%E5%93%88%E5%BC%97/%E8%BD%A6%E6%9C%BAapk/sidemenu/GwmSystemUI.apk"
-	new_apk_url="http://magisk.proyy.com:5201/d/123/%E5%93%88%E5%BC%97/%E8%BD%A6%E6%9C%BAapk/sidemenu/GwmSystemUI-list.apk"
-	bak_tar_url_4013_dg="http://magisk.proyy.com:5201/d/123/%E5%93%88%E5%BC%97/%E8%BD%A6%E6%9C%BAapk/sidemenu/GwmSystemUI-4013DG.tar"
-	bak_tar_url_4025_h6="http://magisk.proyy.com:5201/d/123/%E5%93%88%E5%BC%97/%E8%BD%A6%E6%9C%BAapk/sidemenu/GwmSystemUI-4025H6.tar"
+	bak_apk_url="http://192.3.53.201:5202/d/123/%E5%93%88%E5%BC%97/%E8%BD%A6%E6%9C%BAapk/sidemenu/GwmSystemUI.apk"
+	new_apk_url="http://192.3.53.201:5202/d/123/%E5%93%88%E5%BC%97/%E8%BD%A6%E6%9C%BAapk/sidemenu/GwmSystemUI-list.apk"
+	bak_tar_url_4013_dg="http://192.3.53.201:5202/d/123/%E5%93%88%E5%BC%97/%E8%BD%A6%E6%9C%BAapk/sidemenu/GwmSystemUI-4013DG.tar"
+	bak_tar_url_4025_h6="http://192.3.53.201:5202/d/123/%E5%93%88%E5%BC%97/%E8%BD%A6%E6%9C%BAapk/sidemenu/GwmSystemUI-4025H6.tar"
 	bak_tar_name="GwmSystemUI.tar"
-	new_apk_url_4013_dg="http://magisk.proyy.com:5201/d/123/%E5%93%88%E5%BC%97/%E8%BD%A6%E6%9C%BAapk/sidemenu/GwmSystemUI-list-v2-4013DG_sign.apk"
-	new_apk_url_4025_h6="http://magisk.proyy.com:5201/d/123/%E5%93%88%E5%BC%97/%E8%BD%A6%E6%9C%BAapk/sidemenu/GwmSystemUI-list-v2-4025H6_sign.apk"
+	new_apk_url_4013_dg="http://192.3.53.201:5202/d/123/%E5%93%88%E5%BC%97/%E8%BD%A6%E6%9C%BAapk/sidemenu/GwmSystemUI-list-v2-4013DG_sign.apk"
+	new_apk_url_4025_h6="http://192.3.53.201:5202/d/123/%E5%93%88%E5%BC%97/%E8%BD%A6%E6%9C%BAapk/sidemenu/GwmSystemUI-list-v2-4025H6_sign.apk"
 	new_apk_name="GwmSystemUI-new.apk"
 
 	model=""
@@ -655,7 +685,7 @@ function sidemenu()
 			echo "文件比较大，请保持网络稳定耐心等待一阵。。。"
 			rm -rf $sidemenudir/Gwm*.apk
 			rm -rf $sidemenudir/Gwm*.tar
-			wget -O $new_apk_name $new_apk_url
+			wget -q --show-progress -O $new_apk_name $new_apk_url
 			echo "下载完成，请确认大小，如果大小不对或者下载异常，请10S内断开车机连接直接退出"
 			du -sh $new_apk_name
 			sleep 10
@@ -690,7 +720,7 @@ function sidemenu()
 			echo "文件比较大，请保持网络稳定耐心等待一阵。。。"
 			rm -rf $sidemenudir/Gwm*.apk
 			rm -rf $sidemenudir/Gwm*.tar
-			wget -O $bak_tar_name $bak_tar_url
+			wget -q --show-progress -O $bak_tar_name $bak_tar_url
 			echo "下载完成，请确认大小，如果大小不对或者下载异常，请10S内断开车机连接直接退出"
 			du -sh $bak_tar_name
 			sleep 10
@@ -741,7 +771,7 @@ function kwkj()
 	mkdir $kwdir
 	cd $kwdir
 	Adb_Init
-	bak_apk_url="http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E5%BF%AB%E6%8D%B7%E9%85%B7%E6%88%91/backup/GwmRadio.apk?sign=t0r6r1-WxqbKal7UilLOj8inpNOneWLnDWLQ8oBIvp8=:0"
+	bak_apk_url="http://192.3.53.201:5202/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E5%BF%AB%E6%8D%B7%E9%85%B7%E6%88%91/backup/GwmRadio.apk?sign=t0r6r1-WxqbKal7UilLOj8inpNOneWLnDWLQ8oBIvp8=:0"
 	new_apk_url=""
 	# printf "请选择适配还是回退(1适配/2回退): "
 	# read num
@@ -768,7 +798,7 @@ function kwkj()
 	check=0
 	echo "开始拉取APP文件..."
 	rm -rf $kwdir/GwmRadi*.apk
-	wget -O $apk $bak_apk_url
+	wget -q --show-progress -O $apk $bak_apk_url
 	md5a=`md5sum $apk |awk '{print $1}'`
 	[ "$md5a" == $md5c ]&&echo "校验成功下载完成"||check=1
 	[ "$check" == "1" ]&&echo "下载失败请联系管理员!:$md5a"||echo "ok"
@@ -814,7 +844,7 @@ function engineer()
 	check=0
 	md5a=`md5sum $apk |awk '{print $1}'`
 	[ "$md5a" == "e271fb9a8f3ed46cf1b18becaf6511e4" ]&&echo "校验成功"||check=1
-	[ "$check" == "1" ]&&wget -O $apk "http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/enginner/sotainstaller.apk?sign=oJeaUOObve-Cowbn-h-xDX5azYICMP8L11J8mwrHlVY=:0"||echo "ok"
+	[ "$check" == "1" ]&&wget -q --show-progress -O $apk "http://192.3.53.201:5202/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/enginner/sotainstaller.apk?sign=oJeaUOObve-Cowbn-h-xDX5azYICMP8L11J8mwrHlVY=:0"||echo "ok"
 
 	check=0
 	if [  -f "$bakfile_check"  ]; then
@@ -822,7 +852,7 @@ function engineer()
 		 du -sh $bakfile_check
 	else
 		 echo "文件不存在，开始拉..."
-		 wget -O $apk "http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/enginner/sotainstaller.apk?sign=oJeaUOObve-Cowbn-h-xDX5azYICMP8L11J8mwrHlVY=:0"
+		 wget -q --show-progress -O $apk "http://192.3.53.201:5202/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/enginner/sotainstaller.apk?sign=oJeaUOObve-Cowbn-h-xDX5azYICMP8L11J8mwrHlVY=:0"
 		 md5a=`md5sum $apk |awk '{print $1}'`
 		[ "$md5a" == "e271fb9a8f3ed46cf1b18becaf6511e4" ]&&echo "校验成功下载完成"||check=1
 		[ "$check" == "1" ]&&echo "下载失败请联系管理员!:$md5a"||echo "ok"
@@ -837,9 +867,9 @@ function engineer()
 		[ "$md5a" == "7f78461d60cb9a5e09fbfab53bc21c64" ]&&echo "校验成功"||check=1
 		[ "$check" == "1" ]&&echo "失败请联系管理员!:$md5a"||echo "ok"
 		[ "$check" == "1" ]&&echo "重试中......."||echo "ok"
-		[ "$check" == "1" ]&&wget -O enger.apk "http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/enginner/enger.apk?sign=2UGZh2_G_Fuwj_TnxtbYNoqudif7SAUd4JcaHbzfns8=:0"||echo "ok"
+		[ "$check" == "1" ]&&wget -q --show-progress -O enger.apk "http://192.3.53.201:5202/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/enginner/enger.apk?sign=2UGZh2_G_Fuwj_TnxtbYNoqudif7SAUd4JcaHbzfns8=:0"||echo "ok"
 	else
-		 wget -O enger.apk "http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/enginner/enger.apk?sign=2UGZh2_G_Fuwj_TnxtbYNoqudif7SAUd4JcaHbzfns8=:0"
+		 wget -q --show-progress -O enger.apk "http://192.3.53.201:5202/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/enginner/enger.apk?sign=2UGZh2_G_Fuwj_TnxtbYNoqudif7SAUd4JcaHbzfns8=:0"
 		md5a=`md5sum enger.apk |awk '{print $1}'`
 		[ "$md5a" == "7f78461d60cb9a5e09fbfab53bc21c64" ]&&echo "校验成功下载完成"||check=1
 		[ "$check" == "1" ]&&echo "下载失败请联系管理员!:$md5a"||echo "ok"
@@ -947,7 +977,7 @@ function wecarflow()
 		 [ "$check" == "1" ]&&echo "本地备份校验失败将执行清理操作并拉取网络备份!!!"||echo "ok"
 		 [ "$check" == "1" ]&&rm -rf $bakfile_check ||echo "ok"
 		 [ "$check" == "1" ]&&rm -rf $bakfile_check.md5 ||echo "ok"
-		 [ "$check" == "1" ]&&wget -O wecarflow_backup.zip "http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E7%88%B1%E8%B6%A3%E5%90%AC%E5%A4%87%E4%BB%BD/wecarflow_backup.zip?sign=ArXIsaEAVMAd_ztB87eBiqnXJ_SY9okflMDscQeEAjM=:0" ||echo "ok"
+		 [ "$check" == "1" ]&&wget -q --show-progress -O wecarflow_backup.zip "http://192.3.53.201:5202/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E7%88%B1%E8%B6%A3%E5%90%AC%E5%A4%87%E4%BB%BD/wecarflow_backup.zip?sign=ArXIsaEAVMAd_ztB87eBiqnXJ_SY9okflMDscQeEAjM=:0" ||echo "ok"
 		 [ "$check" == "1" ]&&unzip -d $aqdir wecarflow_backup.zip ||echo "ok"
 		 echo "请确认备份文件大小是否正常,$bak_tar_size左右"
 		 du -sh $bakfile_check
@@ -961,7 +991,7 @@ function wecarflow()
 	case $num in
 		1)
 			echo "你选择了升级爱趣听至2.6版本"
-			wget -O wecarflow.tar  "http://magisk.proyy.com:5201/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E7%88%B1%E8%B6%A3%E5%90%AC%E5%A4%87%E4%BB%BD/%E7%88%B1%E8%B6%A3%E5%90%AC2.6.tar?sign=QpKZErqeT_q-Yo9HpP81DKWF-zKp_3ycTL2MDZxDbQk=:0"
+			wget -q --show-progress -O wecarflow.tar  "http://192.3.53.201:5202/d/lanzou/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97/%E5%93%88%E5%BC%97%E5%A4%A7%E7%8B%97%E6%9C%80%E6%96%B0%E8%BD%A6%E6%9C%BA%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9apk/%E7%88%B1%E8%B6%A3%E5%90%AC%E5%A4%87%E4%BB%BD/%E7%88%B1%E8%B6%A3%E5%90%AC2.6.tar?sign=QpKZErqeT_q-Yo9HpP81DKWF-zKp_3ycTL2MDZxDbQk=:0"
 			filename="wecarflow.tar"
 			echo "5830d10b16622ce21a6c4cf7ade23225"
 			md5a=`md5sum $filename |awk '{print $1}'`
@@ -1029,7 +1059,7 @@ function installapk()
 		echo "获取到手动APK url:$apk_url"
 		
 	fi
-	wget -O $apk "$apk_url"
+	wget -q --show-progress -O $apk "$apk_url"
 	if [  -f "$apk"  ]; then
 		 echo "APK存在"
 		 du -sh $bakfile_check
@@ -1045,11 +1075,14 @@ function quanping()
 {
     cd $Work_Path
 	Adb_Init
+	sleep 3
+	clear
 	echo "开始检测当前车机的全屏配置规则"
 	adb shell "settings get global policy_control"
 	echo "1、设置所有第三方APP全屏"
 	echo "2、恢复系统默认设置"
 	echo "3、可自定义全屏包名"
+	echo "4、在现有的基础上配置高德为全屏(修复侧边栏重叠问题)"
 	echo ""
 	read -p "请输入数字选择:" num
 
@@ -1066,6 +1099,10 @@ function quanping()
 			echo "可自定义全屏包名，多个app请用,号隔开,例如输入 com.autonavi.amapauto,cn.kuwo.kwmusiccar"
 			read -p "请输入自定义全屏包名确认无误后回车:" pkg_name
 			adb shell settings put global policy_control immersive.navigation=$pkg_name
+			;;
+		4)
+			echo "开始设置"
+			policy_control_z "com.autonavi.amapauto"
 			;;
 		*)
 			echo "error"
@@ -1143,9 +1180,9 @@ function menu()
 ***********************************************
 *                      YiTools                *
 
-*  1.车机高德升级为全屏版|快捷版|还原         *
+*  9.升级高德带三指全屏整合菜单版|还原-灰度测试*
 
-*  9.车机高德升级为带三指Beta版|还原-灰度测试*
+*  1.升级替换高德全屏界面高德官版无三指等可还原*
 
 *  2.左侧虚拟音乐按键直接跳转三方音乐-灰度测试*
 
