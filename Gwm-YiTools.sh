@@ -208,7 +208,8 @@ function AutoMap()
     list_url="https://ghproxy.com/https://github.com/proyy/Gwm-YiTools-Script/raw/main/stable.csv"
     read -p "请输入数字升级6.6全屏非适配版|快捷键|回退(2/1/0):" select_num
     
-    list_data=`wget -O stable.csv $list_url|cat stable.csv|grep "^$select_num,"`
+    wget -O stable.csv $list_url
+    list_data=`cat stable.csv|grep "^$select_num,"`
     #echo "$list_data"
     if [[ "$list_data" == "" ]];then
     	echo "输入错误，请截图反馈至管理员，或者确认输入的内容再重试一下"
@@ -386,7 +387,8 @@ function AutoMapBeta()
     wget -T 3 -O note.md https://ghproxy.com/https://github.com/proyy/Gwm-YiTools-Script/raw/main/note.md >/dev/null 2>&1 && cat note.md|head -n 11
     read -p "请根据提示输入数字选择|或者回退(9304/0):" select_num
     
-    list_data=`wget -O beta.csv $list_url|cat beta.csv|grep "^$select_num,"`
+    wget -O beta.csv $list_url
+    list_data=`cat beta.csv|grep "^$select_num,"`
     #echo "$list_data"
     if [[ "$list_data" == "" ]];then
     	echo "输入错误，请截图反馈至管理员，或者确认输入的内容再重试一下"
